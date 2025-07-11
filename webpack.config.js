@@ -46,7 +46,7 @@ Encore
     .enableVersioning(Encore.isProduction())
 
     .enablePostCssLoader()
-
+   //.enableStimulusBridge('./assets/controllers.json')
 
     // configure Babel
     // .configureBabel((config) => {

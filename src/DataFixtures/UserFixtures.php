@@ -26,7 +26,10 @@ class UserFixtures extends Fixture
                     ->setCreatedAt(new \DateTimeImmutable())
                     ->setLogin($faker->name())
                     ->setPassword($this->userPasswordHasher->hashPassword($user,'ArethiA75!'))
-                    ->setPhone($faker->phoneNumber());
+                    ->setPhone($faker->serviceNumber())
+                    ->setIsVerified(true)
+                    ->setIsNewsLetter(true)
+                    ->setPortrait('default.jpg');
 
             $manager->persist($user);
         }

@@ -20,6 +20,10 @@ return [
         'path'=>'./assets/js/login/login.js',
         'entrypoint'=>true,
     ],
+        'register'=>[
+        'path'=>'./assets/js/registration/registration.js',
+        'entrypoint'=>true,
+    ],
     '@hotwired/stimulus' => [
         'version' => '3.2.2',
     ],

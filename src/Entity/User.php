@@ -13,8 +13,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
-#[UniqueEntity(fields: ['email'], message:'Cet email existe déjà!')]
-#[UniqueEntity(fields:['login'],message: 'Ce login existe déjà !')]
+#[UniqueEntity(fields: ['email'], message: 'Cet email existe déjà!')]
+#[UniqueEntity(fields: ['login'], message: 'Ce login existe déjà !')]
 #[ORM\EntityListeners(['App\EntityListener\UserListener'])]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -28,9 +28,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 180)]
     #[Assert\email()]
-    #[Assert\Regex(
-        pattern:'"/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i"'
-    )]
     private ?string $email = null;
 
     /**
@@ -40,7 +37,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private array $roles = [];
 
     #[Assert\Regex(
-        pattern:'/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{10}$/'
+        pattern: '/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{10}$/'
     )]
     private $plainPassword;
 
@@ -50,13 +47,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 30)]
     #[Assert\Regex(
-       pattern: '/^[a-zA-Z \'-éàèêçïù]{10,50}$/')]
+        pattern: '/^[a-zA-Z \'-éàèêçïù]{10,30}$/'
+    )]
     private ?string $login = null;
 
-    #[ORM\Column(length: 20, nullable: true)]
-    private ?string $phone = null;
+    #[ORM\Column(length: 20, nullable: true, options: ['default' => '0000000000'])]
+    private ?string $phone = '';
+
+    #[ORM\Column]
+    private ?bool $isVerified = false;
+
+    #[ORM\Column]
+    private ?bool $isNewsLetter = false;
+
+    #[ORM\Column(length: 255)]
+    private ?string $portrait = null;
 
     public function getId(): ?int
     {
@@ -129,7 +136,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __serialize(): array
     {
         $data = (array) $this;
-        $data["\0".self::class."\0password"] = hash('crc32c', $this->password);
+        $data["\0" . self::class . "\0password"] = hash('crc32c', $this->password);
 
         return $data;
     }
@@ -155,6 +162,42 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPhone(?string $phone): static
     {
         $this->phone = $phone;
+        return $this;
+    }
+
+    public function isVerified(): ?bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): static
+    {
+        $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function isNewsLetter(): ?bool
+    {
+        return $this->isNewsLetter;
+    }
+
+    public function setIsNewsLetter(bool $isNewsLetter): static
+    {
+        $this->isNewsLetter = $isNewsLetter;
+
+        return $this;
+    }
+
+    public function getPortrait(): ?string
+    {
+        return $this->portrait;
+    }
+
+    public function setPortrait(string $portrait): static
+    {
+        $this->portrait = $portrait;
+
         return $this;
     }
 }
