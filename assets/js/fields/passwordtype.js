@@ -4,8 +4,11 @@ const controlPassword = function (champ){
     const passwordRegex = new RegExp("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{10}$");
     if(champ.value.match(passwordRegex)){
         successBorder(champ);
-    }else{
+        return true;
+    }else if(!champ.value.match(passwordRegex))
+    {
         alertBorder(champ);
+        return false;
     }
 }
 

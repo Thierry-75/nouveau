@@ -33,7 +33,7 @@ class RegistrationFormType extends AbstractType
                     'class' => 'input-gray',
                     'placeholder' => 'Email',
                     'autofocus' => true,
-                    'required' => true
+                    'required' => true,
                 ],
                 'label'=>false,
                 'constraints' => [

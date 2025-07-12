@@ -1,10 +1,11 @@
 const validateImage = function (input) {
     let error = document.querySelector("#error");
+    let retour = false;
     error.innerHTML = "";
     if (input.files) {
         let file = input.files[0];
         if (!file) {
-            return false;
+            return retour;
         }
         let reader = new FileReader();
         reader.readAsDataURL(file);
@@ -15,7 +16,7 @@ const validateImage = function (input) {
         };
         if (file.size > 1024 * 1024 * 2) {
             error.innerHTML = "Le ficheir doit être plus petit que 2 MB";
-            return false;
+            return retour;
         }
         let allowedExtension = ["jpeg", "jpg"];
         var fileExtension = document
@@ -23,15 +24,15 @@ const validateImage = function (input) {
             .value.split(".")
             .pop()
             .toLowerCase();
-        var isValid = false;
+
         for (var index in allowedExtension) {
             if (fileExtension === allowedExtension[index]) {
-                isValid = true;
+            retour = true;
                 break;
             }
         
         }
-        return isValid;
+        return retour;
     }
 };
 

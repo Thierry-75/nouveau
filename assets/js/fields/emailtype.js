@@ -6,12 +6,12 @@ const controlEmail = function (champ) {
     if (champ.value.match(emailRegex)) {
         successBorder(champ);
         return true;
-    } else {
+    } else if (!champ.value.match(emailRegex))
+{
         alertBorder(champ);
         return false;
     }
 }
-
 export  {controlEmail}
 
 
