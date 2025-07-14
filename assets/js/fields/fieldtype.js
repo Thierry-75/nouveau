@@ -75,5 +75,31 @@ const checkFieldsRegister = function(email,pseudo,password,phone,photo,rgpd,bout
         }
 }
 
+const checkCourriel = function(champ,bouton){
+    if(champ.classList.contains('border-green-300')){
+        bouton.classList.remove('btn-retour');
+        bouton.classList.add('btn-validation');
+        bouton.textContent="Validez ! ";
+    }else{
+        bouton.classList.remove('btn-validation');
+        bouton.classList.add('btn-retour');
+        bouton.textContent="Saisir";
+    }
+}
 
-export {info,clearRemember,clearField,successBorder,alertBorder,clearBorder,checkFields,redField,greenField,yellowfield,checkFieldsRegister} 
+const checkPasswords = function(champ1,champ2,bouton){
+        if(champ1.classList.contains('border-green-300')  && champ2.classList.contains('border-green-300') && champ1.value===champ2.value) 
+             {
+            message.innerHTML="";
+            bouton.classList.remove('btn-retour');
+            bouton.classList.add('btn-validation');
+            bouton.textContent = "Validez";
+        }else if(champ1.classList.contains('border-red-300') || champ2.classList.contains('border-red-300') || champ1.value !==champ2.value) {
+            bouton.classList.remove('btn-validation');
+            bouton.classList.add('btn-retour');
+            bouton.textContent = "Nouveau mot de passe";
+        }
+}
+
+
+export {info,clearRemember,clearField,successBorder,alertBorder,clearBorder,checkFields,redField,greenField,yellowfield,checkFieldsRegister,checkCourriel,checkPasswords} 

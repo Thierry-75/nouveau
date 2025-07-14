@@ -5,7 +5,7 @@ const controlPassword = function (champ){
     if(champ.value.match(passwordRegex)){
         successBorder(champ);
         return true;
-    }else if(!champ.value.match(passwordRegex))
+    }else if(!champ.value.match(passwordRegex)  && champ.value !="")
     {
         alertBorder(champ);
         return false;

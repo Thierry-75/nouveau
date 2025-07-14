@@ -16,13 +16,21 @@ return [
         'path' => './assets/app.js',
         'entrypoint' => true,
     ],
-    'login'=>[
-        'path'=>'./assets/js/login/login.js',
-        'entrypoint'=>true,
+    'login' => [
+        'path' => './assets/js/login/login.js',
+        'entrypoint' => true,
     ],
-        'register'=>[
-        'path'=>'./assets/js/registration/registration.js',
-        'entrypoint'=>true,
+    'register' => [
+        'path' => './assets/js/registration/registration.js',
+        'entrypoint' => true,
+    ],
+    'forgetPassword' => [
+        'path' => './assets/js/forgotten-password/forget-password.js',
+        'entrypoint' => true,
+    ],
+        'password' => [
+        'path' => './assets/js/new-password/new-password.js',
+        'entrypoint' => true,
     ],
     '@hotwired/stimulus' => [
         'version' => '3.2.2',
