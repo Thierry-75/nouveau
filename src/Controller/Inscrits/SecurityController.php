@@ -7,7 +7,6 @@ use App\Form\RequestPasswordFormType;
 use App\Message\SendPasswordConfirm;
 use App\Message\SendPasswordRequest;
 use App\Repository\UserRepository;
-use App\Service\IntraController;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityNotFoundException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

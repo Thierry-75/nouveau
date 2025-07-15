@@ -51,7 +51,6 @@ class RegistrationController extends AbstractController
                             $subject="Activation de votre compte";
                             $destination ='check_user';
                             $nomTemplate ='register';
-                            
                             $intraController->emailValidate($user,$jwtService,$messageBusInterface,$destination,$subject,$nomTemplate);
                             $this->addFlash('alert-warning','SVP, confirmez votre adresse email');
                             return $this->redirectToRoute('app_main');
