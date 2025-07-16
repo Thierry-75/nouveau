@@ -92,7 +92,7 @@
                                           <a href="{# path('app_article_add')#}" class="text-orange-800 hover:text-cyan-700 text-sm">Rédaction</a>
                                       </li>
                                       <li>
-                                          <a href="{# path('app_avatar_profil',{id:app.user.id} ) #}" class="text-orange-800 hover:text-cyan-700 text-sm">Voir profil</a>
+                                          <a href="{{ path('app_profil_show',{id:app.user.id} ) }}" class="text-orange-800 hover:text-cyan-700 text-sm">Voir profil</a>
                                       </li>
                                       <li>
                                           <a href="{{ path('app_logout')}}" class="text-orange-800 hover:text-cyan-700 text-sm">Se déconnecter</a>
@@ -122,7 +122,7 @@
                                           <a href="{# path('app_article_add')#}" class="text-orange-800 hover:text-cyan-700 text-sm">Rédaction</a>
                                       </li>
                                       <li>
-                                          <a href="{# path('app_avatar_profil',{id:app.user.id} ) #}" class="text-orange-800 hover:text-cyan-700 text-sm">Voir profil</a>
+                                          <a href="{{ path('app_profil_show',{id:app.user.id} ) }}" class="text-orange-800 hover:text-cyan-700 text-sm">Voir profil</a>
                                       </li>
                                       <li>
                                           <a href="{{ path('app_logout')}}" class="text-orange-800 hover:text-cyan-700 text-sm">Se déconnecter</a>
@@ -148,7 +148,7 @@
                                   <h3 class="text-lg font-semibold text-cyan-600 mb-4">Choix :</h3>
                                   <ul class="space-y-3">
                                       <li>
-                                          <a href="{# path('app_avatar_profil',{id:app.user.id} ) #}" class="text-orange-800 hover:text-cyan-700 text-sm">Voir profil</a>
+                                          <a href="{{ path('app_profil_show',{id:app.user.id} ) }}" class="text-orange-800 hover:text-cyan-700 text-sm">Voir profil</a>
                                       </li>
                                       <li>
                                           <a href="{{ path('app_logout')}}" class="text-orange-800 hover:text-cyan-700 text-sm">Se déconnecter</a>
@@ -183,8 +183,8 @@
     </div>
       </div><!-- Mobile menu, show/hide based on menu state --><div class="sm:hidden hidden" id="mobile-menu">
           <div class="px-2 pt-2 pb-3 space-y-1">
-              <a href="#" class="bg-gray-100 text-gray-900 block px-3 py-2 rounded-md text-base font-medium">Home</a>
-
+              <a href="#" class="bg-gray-100 text-orange-800 block px-3 py-2 rounded-md text-base font-medium">Home</a>
+              <div class="pt-4 pb-3 border-t border-cyan-200 flex "></div>
               <!-- Mobile Products Dropdown -->
               <div class="relative">
                   <button class="w-full text-left text-gray-900 hover:bg-gray-100 px-3 py-2 rounded-md text-base font-medium flex items-center justify-between mobile-dropdown-trigger">
@@ -230,7 +230,7 @@
               <a href="#" class="text-gray-900 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">Contact</a>
               <div class="px-2 pt-2 pb-3 space-y-1">
                   {% if app.user%}
-                  <a href="#" class="bg-amber-50 text-orange-800 block px-3 py-2 rounded-md text-base font-medium">{{ app.user.login }}</a>
+                  <a href="#" class="bg-gray-100 text-orange-800 block px-3 py-2 rounded-md text-base font-medium">{{ app.user.login }}</a>
                   <div class="pt-4 pb-3 border-t border-cyan-200 flex ">
                       <div class="flex items-center px-3 space-y-2 flex-row-reverse">
                           <div class="relative">
@@ -248,7 +248,7 @@
                                               <a href="#" class="text-orange-800 hover:text-cyan-700 text-sm block">Administration</a>
                                               </li>
                                               <li>
-                                                  <a href="{# path('app_avatar_profil',{'id':app.user.id} )#}" class="text-orange-800 hover:text-cyan-700 text-sm block">Profil</a>
+                                                  <a href="{{ path('app_profil_show',{id:app.user.id} ) }}" class="text-orange-800 hover:text-cyan-700 text-sm block">Profil</a>
                                               </li>
                                               <li>
                                                   <a href="{{ path('app_logout') }}" class="text-orange-800 hover:text-cyan-700 text-sm block">Déconnexion</a>
@@ -265,7 +265,7 @@
                                               <a href="{# path('app_article_add')#}" class="text-orange-800 hover:text-cyan-700 text-sm block">Rédaction</a>
                                           </li>
                                           <li>
-                                              <a href="{# path('app_avatar_profil',{'id':app.user.id} )#}" class="text-orange-800 hover:text-cyan-700 text-sm block">Profil</a>
+                                              <a href="{{ path('app_profil_show',{id:app.user.id} ) }}" class="text-orange-800 hover:text-cyan-700 text-sm block">Profil</a>
                                           </li>
                                           <li>
                                               <a href="{{ path('app_logout') }}" class="text-orange-800 hover:text-cyan-700 text-sm block">Déconnexion</a>
@@ -278,7 +278,7 @@
                                   <div class="border-l-2 border-indigo-500 pl-2 mb-4">
                                       <ul class="space-y-2">
                                           <li>
-                                              <a href="{# path('app_avatar_profil',{'id':app.user.id} )#}" class="text-orange-800 hover:text-cyan-700 text-sm block">Voir profil</a>
+                                              <a href="{{ path('app_profil_show',{id:app.user.id} ) }}" class="text-orange-800 hover:text-cyan-700 text-sm block">Voir profil</a>
                                           </li>
                                           <li>
                                               <a href="{{ path('app_logout') }}" class="text-orange-800 hover:text-cyan-700 text-sm block">Déconnexion</a>

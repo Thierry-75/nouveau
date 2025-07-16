@@ -12,11 +12,11 @@ use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 final class SendPasswordRequestHandler
 {
 
-    public function __construct(private MailerInterface $mailer) {}
+    public function __construct(private readonly MailerInterface $mailer) {}
 
     public function __invoke(SendPasswordRequest $message): void
     {
-        $email = new TemplatedEmail()
+        $email = (new TemplatedEmail())
             ->from($message->getFrom())
             ->to($message->getTo())
             ->subject($message->getSubject())

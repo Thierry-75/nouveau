@@ -8,11 +8,11 @@ use Symfony\Component\Messenger\Attribute\AsMessage;
 final class SendPasswordRequest
 {
     /**
-     * @param $from
-     * @param $to
-     * @param $subject
-     * @param $template
-     * @param $context
+     * @param string $from
+     * @param string $to
+     * @param string $subject
+     * @param string $template
+     * @param array $context
      */
     public function __construct(private string $from, private string $to, private string $subject, private string $template, private array $context) {}
 

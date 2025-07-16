@@ -53,7 +53,7 @@ class RegistrationFormType extends AbstractType
                         new NotBlank(),
                         new Regex(
                             pattern:"/^.{3,27}#[0-9]{2}$/i",
-                            htmlPattern:"/^.{3,27}#[0-9]{2}$/")
+                            htmlPattern:"^.{3,27}#[0-9]{2}$")
                     ])
                 ]
 
@@ -102,10 +102,10 @@ class RegistrationFormType extends AbstractType
                 new Sequentially([
                     new NotBlank(),
                     new Image(
-                        minWidth:'500',
-                        maxWidth:'800',
-                        minHeight:'500',
-                        maxHeight:'800'
+                        minWidth: '800',
+                        maxWidth: '1024',
+                        maxHeight: '768',
+                        minHeight: '600'
                     ),
                     new File(
                         maxSize:'2M',
@@ -133,8 +133,8 @@ class RegistrationFormType extends AbstractType
         ;
     }
 
-        public function addData(PostSubmitEvent $event)
-    {
+        public function addData(PostSubmitEvent $event): void
+        {
         $data = $event->getData();
         if (!($data instanceof User)) return;
         $data->setCreatedAt(new \DateTimeImmutable());

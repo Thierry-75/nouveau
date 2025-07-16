@@ -12,7 +12,7 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 final class SendActivationMessageHandler
 {
 
-    private $mailer;
+    private MailerInterface $mailer;
 
     public function __construct(MailerInterface $mailer) {
         $this->mailer = $mailer;
@@ -20,7 +20,7 @@ final class SendActivationMessageHandler
 
     public function __invoke(SendActivationMessage $message): void
     {
-        $email = new TemplatedEmail()
+        $email = (new TemplatedEmail())
             ->from($message->getFrom())
             ->to($message->getTo())
             ->subject($message->getSubject())
