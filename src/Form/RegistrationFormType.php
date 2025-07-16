@@ -5,7 +5,6 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\AbstractType;
-use Symfony\UX\Dropzone\Form\DropzoneType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Event\PostSubmitEvent;
 use Symfony\Component\Validator\Constraints\File;
@@ -13,7 +12,6 @@ use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Image;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Constraints\IsTrue;
-use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -30,12 +28,13 @@ class RegistrationFormType extends AbstractType
         $builder
             ->add('email', EmailType::class, [
                 'attr' => [
-                    'class' => 'input-gray',
+                    'class' => 'input-gray mt-1  mb-1',
                     'placeholder' => 'Email',
                     'autofocus' => true,
                     'required' => true,
                 ],
-                'label'=>false,
+                'label'=>'Email ',
+                 'label_attr'=>['class'=>'text-cyan-800 text-xs mb-0'],
                 'constraints' => [
                     new Sequentially([
                         new NotBlank(),
@@ -44,28 +43,30 @@ class RegistrationFormType extends AbstractType
                 ]
             ])
             ->add('login',TextType::class,['attr'=>[
-                'class'=>'input-gray',
-                'placeholder'=>'Pseudo',
+                'class'=>'input-gray mt-1 mb-1',
+                'placeholder'=>'Exemple: KiBender#12',
                 'required'=>true],
-                'label'=>false,
+                'label'=>'Pseudo',
+                  'label_attr'=>['class'=>'text-cyan-800 text-xs mb-0'],
                 'constraints'=>[
                     new Sequentially([
                         new NotBlank(),
                         new Regex(
-                            pattern:"/^[a-zA-Z '-éàèêçïù]{10,30}$/i",
-                            htmlPattern:"^[a-zA-Z '-éàèêçïù]{10,30}$")
+                            pattern:"/^.{3,27}#[0-9]{2}$/i",
+                            htmlPattern:"/^.{3,27}#[0-9]{2}$/")
                     ])
                 ]
-                
+
                 ])
             ->add('plainPassword', PasswordType::class, [
                 'mapped' => false,
                 'attr' => [
-                    'class' => 'input-gray',
+                    'class' => 'input-gray mt-1 mb-1',
                     'placeholder' => 'Mot de passe',
                     'required' => true
                 ],
-                'label'=>false,
+                'label'=>'Mot de passe',
+                 'label_attr'=>['class'=>'text-cyan-800 text-xs mb-0'],
                 'constraints' => [
                     new Sequentially([
                         new NotBlank(),
@@ -77,10 +78,11 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('phone',TextType::class,['attr'=>[
-                'class'=>'input-gray',
+                'class'=>'input-gray mt-1 mb-1',
                 'required'=>false,
                 'placeholder'=>'Téléphone   facultatif *'],
-                'label'=>false,
+                'label'=>'Téléphone',
+                   'label_attr'=>['class'=>'text-cyan-800 text-xs mb-0'],
                 'constraints'=>[
                     new Regex(
                         pattern:'/^[(]?[0-9]{10,10}$/i',
@@ -89,11 +91,13 @@ class RegistrationFormType extends AbstractType
                 ]
             ])
             ->add('portrait',FileType::class,['attr'=>[
-                'class'=>'input-gray',
+                'class'=>'input-gray mt-1 mb-1',
                 'required'=>true,
                 'mapped'=>false,
                 'multiple'=>false,
             ],
+            'label'=>'Photo',
+            'label_attr'=>['class'=>'text-cyan-800 text-xs mb-0'],
             'constraints'=>[
                 new Sequentially([
                     new NotBlank(),
@@ -115,11 +119,11 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'attr' => [
-                    'class' => '',
+                    'class' => 'mb-1 mt-1',
                     'required' => true
                 ],
                 'label' => ' Accepter les conditions générales',
-                'label_attr' => ['class' => 'font-light text-gray-500 ml-4 dark:text-gray-300 text-xs', 'id' => 'agree_state'],
+                'label_attr' => ['class' => 'font-light text-cyan-800 ml-4 dark:text-gray-300 text-xs', 'id' => 'agree_state'],
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue()

@@ -12,6 +12,7 @@ use Doctrine\ORM\EntityNotFoundException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Messenger\Exception\ExceptionInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
@@ -46,6 +47,9 @@ protected const WEBMASTER = 'webmaster@my-domain.org';
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 
+    /**
+     * @throws ExceptionInterface
+     */
     #[Route(path:'/forgotten-password',name:'forgotten_password', methods:['GET','POST'])]
     public function forgottenPassword(Request $request,
     ValidatorInterface $validatorInterface,
@@ -70,7 +74,7 @@ protected const WEBMASTER = 'webmaster@my-domain.org';
                     $inscrit->setResetToken($token);
                     $entityManagerInterface->flush();
                     $url = $this->generateUrl('reset_password',['token'=>$token],UrlGeneratorInterface::ABSOLUTE_URL);
-                    $messageBusInterface->dispatch(new SendPasswordRequest(SecurityController::WEBMASTER,$inscrit->getEmail(),'Demande de nouveau mot passe','password_reset',['url'=>$url,'user'=>$inscrit]));
+                    $messageBusInterface->dispatch(new SendPasswordRequest(self::WEBMASTER,$inscrit->getEmail(),'Demande de nouveau mot passe','password_reset',['url'=>$url,'user'=>$inscrit]));
                     $this->addFlash('alert-warning',"Lien d'activation nouveau mot de passe envoyé");
                     return $this->redirectToRoute('app_main');
                 }catch(EntityNotFoundException $e){
@@ -81,6 +85,9 @@ protected const WEBMASTER = 'webmaster@my-domain.org';
          return $this->render('security/reset_password_request.html.twig', ['requestForm' => $form->createView()]);
     }
 
+    /**
+     * @throws ExceptionInterface
+     */
     #[Route('/lost-password/{token}', name:'reset_password')]
     public function resetPassword(string $token, Request $request, UserRepository $userRepository, ValidatorInterface $validatorInterface,
     EntityManagerInterface $entityManagerInterface, UserPasswordHasherInterface $userPasswordHasherInterface, MessageBusInterface $messageBusInterface): Response
@@ -105,7 +112,7 @@ protected const WEBMASTER = 'webmaster@my-domain.org';
                                             $entityManagerInterface->persist($user);
                                             $entityManagerInterface->flush();
                                             $url = $this->generateUrl('app_main',[],UrlGeneratorInterface::ABSOLUTE_URL);
-                                            $messageBusInterface->dispatch(new SendPasswordConfirm(SecurityController::WEBMASTER,$user->getEmail(),'Nouveau mot de passe','new_password',['user'=>$user,'url'=>$url]));
+                                            $messageBusInterface->dispatch(new SendPasswordConfirm(self::WEBMASTER,$user->getEmail(),'Nouveau mot de passe','new_password',['user'=>$user,'url'=>$url]));
                                             $this->addFlash('alert-success','Votre mot de passe a été modifié !');
                                             return $this->redirectToRoute('app_login');
                                         }

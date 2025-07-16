@@ -138,24 +138,24 @@ window.onload = () => {
         change_password_form_submit.addEventListener('click',function(e){
             let inputs = reset_password_form.getElementsByTagName('input');
             let compteur =0; let nbborder =0; let fieldSuccess =[]; let num = 0; let compareFirst; let compareSecond;
-            for (var i = 0; i < inputs.length; i++)
+            for (let i = 0; i < inputs.length; i++)
             {
-                if(inputs[i].type=='password'){
+                if(inputs[i].type==='password'){
                     fieldSuccess[i]= inputs[i];
                 }
             }
-            for(var j = 0; j < fieldSuccess.length; j++)
+            for(let j = 0; j < fieldSuccess.length; j++)
             {
-                if(fieldSuccess[j].value ==''  || fieldSuccess[j].classList.contains('border-red-300'))
+                if(fieldSuccess[j].value ===''  || fieldSuccess[j].classList.contains('border-red-300'))
                 {
                     alertBorder(fieldSuccess[j])
                     compteur++;
                 }
-                else if(!fieldSuccess[j].value=="" && fieldSuccess[j].classList.contains('border-green-300'))
+                else if(fieldSuccess[j].value!=="" && fieldSuccess[j].classList.contains('border-green-300'))
                 {
                     successBorder(fieldSuccess[j])
                     nbborder++;
-                    if(num == 0){
+                    if(num === 0){
                         compareFirst= fieldSuccess[num];
                     }else{
                         compareSecond =fieldSuccess[num];
@@ -163,7 +163,7 @@ window.onload = () => {
                     num++;
                 }
             }
-            if(!compteur==0 || !fieldSuccess.length == nbborder || compareFirst.value !== compareSecond.value )
+            if(compteur!==0 || fieldSuccess.length !== nbborder || compareFirst.value !== compareSecond.value )
             {
                 e.preventDefault();
                 e.stopImmediatePropagation();

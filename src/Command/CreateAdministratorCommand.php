@@ -5,7 +5,6 @@ namespace App\Command;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -75,7 +74,7 @@ class CreateAdministratorCommand extends Command
 
         $this->entityManagerInterface->persist($admin);
         $this->entityManagerInterface->flush();
-    
+
         $io->success('Le compte administrateur a été créé !');
         return Command::SUCCESS;
     }

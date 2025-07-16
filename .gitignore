@@ -25,3 +25,17 @@
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
+
+###> jetbrains ###
+/.idea/
+.idea/*
+.idea/blog.iml
+/.idea/.gitignore
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/inspectionProfiles/
+/.idea/misc.xml
+/.idea/vcs.xml
+/.idea/php.xml
+/.idea/encore.xml
+###< jetbrains ###

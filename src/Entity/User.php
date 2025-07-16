@@ -49,9 +49,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column(length: 30)]
-    #[Assert\Regex(
-        pattern: '/^[a-zA-Z \'-éàèêçïù]{10,30}$/'
-    )]
+    #[Assert\Regex( 
+        pattern: '/^.{3,27}#[0-9]{2}$/'
+        )]
     private ?string $login = null;
 
     #[ORM\Column(length: 20, nullable: true, options: ['default' => '0000000000'])]

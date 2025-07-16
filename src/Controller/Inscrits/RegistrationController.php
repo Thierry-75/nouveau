@@ -43,8 +43,8 @@ class RegistrationController extends AbstractController
                         $email = $form->get('email')->getData();
                         $image = $form->get('portrait')->getData();
                         try{
-                            if($image->getClientOriginalExtension()=='jpeg'  || $image->getClientOriginalExtension()=='jpg'){
-                            $portrait = $photoService->add($image,$email,RegistrationController::USERS,256,256);
+                            if($image->getClientOriginalExtension() === 'jpeg'  || $image->getClientOriginalExtension() === 'jpg'){
+                            $portrait = $photoService->add($image,$email, self::USERS,256,256);
                             $user->setPortrait($portrait);
                             $entityManager->persist($user);
                             $entityManager->flush();

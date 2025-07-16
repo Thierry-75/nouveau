@@ -3,7 +3,7 @@
 import { alertBorder, successBorder } from "./fieldtype.js";
 
 const controlPseudo = function (champ){
-    const pseudoRegex = new RegExp("^[a-zA-Z '-éàèêçïù]{10,30}$");
+    const pseudoRegex = new RegExp("^.{3,27}#[0-9]{2}$");
     if(champ.value.match(pseudoRegex)){
         successBorder(champ);
         return true;
