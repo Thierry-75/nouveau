@@ -32,6 +32,10 @@ return [
         'path' => './assets/js/new-password/new-password.js',
         'entrypoint' => true,
     ],
+    'updateProfil' => [
+        'path' => './assets/js/update-profil/update-profil.js',
+        'entrypoint' => true,
+    ],
     '@hotwired/stimulus' => [
         'version' => '3.2.2',
     ],

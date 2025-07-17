@@ -21,7 +21,7 @@ class UpdateProfilUserFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('login',TextType::class,['attr'=>['class'=>'input-gray mt-1 mb-1'],'label'=>'Identifiant',
+            ->add('login',TextType::class,['attr'=>['class'=>'input-gray mt-1 mb-1','autofocus'=>true],'label'=>'Identifiant',
                 'required'=>false,
                 'label_attr'=>['class'=>'text-cyan-800 text-xs mb-0'],
                 'constraints'=>[

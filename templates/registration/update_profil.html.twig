@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block importmap %}
-    {# importmap(['register']) #}
+    {{ importmap(['updateProfil']) }}
 {% endblock %}
 
 {% block body %}
@@ -12,15 +12,13 @@
         <div class="grid md:grid-cols-3 items-center shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-xl overflow-hidden">
             <div class="max-md:order-1 flex flex-col justify-center space-y-16 max-md:mt-16 min-h-full bg-gradient-to-r from-cyan-950 to-cyan-700 lg:px-8 px-4 py-4">
                 <div>
-                    <h6 class="text-white text-sm text-left font-semibold">Modifier votre profil</h6>
+                    <h6 class="text-amber-400 text-sm text-left font-semibold">Modifier votre profil</h6>
                     <p class="text-[12px] italic text-white text-left mt-2 leading-relaxed">Bienvenue</p>
+                    <p class="text-[12px] italic text-white text-left mt-2 leading-relaxed">Photo obligatoire</p>
                     <ul id="allowState">
-                        <li id="allowEmail" class="text-[12px] italic mt-4 ml-3 leading-relaxed"></li>
                         <li id="allowPseudo" class="text-[12px] italic mt-1 ml-3 leading-relaxed"></li>
-                        <li id="allowPassword" class="text-[12px] italic mt-1 ml-3 leading-relaxed"></li>
                         <li id="allowPhone" class="text-[12px] italic mt-1 ml-3 leading-relaxed"></li>
                         <li id="allowPhoto" class="text-[12px] italic mt-1 ml-3 leading-relaxed"></li>
-                        <li id="allowAgreeTerms" class="text-[12px] italic mt-1 ml-3 leading-relaxed"></li>
                     </ul>
                 </div>
                 <div>
@@ -28,13 +26,7 @@
                     <p id="message" class="text-sm italic text-yellow-200 mt-2 leading-relaxed"></p>
                     <p id="messageBis" class="text-sm italic text-yellow-200 mt-2 leading-relaxed"></p>
                     <div class="ml-4">
-                        <ul id='password_criteria' class="text-yellow-200 text-xs">
-                            <li id="password_length_criteria" data-password-criteria>10 caractères au total</li>
-                            <li id="password_special_character_criteria" data-password-criteria>1 caractère spécial au moins</li>
-                            <li id="password_uppercase_criteria" data-password-criteria>1 lettre majuscule au moins</li>
-                            <li id="password_number_criteria" data-password-criteria>1 chiffre au moins</li>
-                            <li id="password_lowercase_criteria" data-porgetpasswordassword-criteria>1 lettre minuscule au moins</li>
-                        </ul>
+
                     </div>
                 </div>
             </div>
@@ -99,7 +91,7 @@
 
             </div>
             <div class=" mt-8">
-                <button type="submit" id="registration_form_submit" class="btn-retour">
+                <button type="submit" id="modification_form_submit" class="btn-retour">
                     Modifier le profil
                 </button>
             </div>

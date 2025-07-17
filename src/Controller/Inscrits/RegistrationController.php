@@ -153,7 +153,7 @@ class RegistrationController extends AbstractController
                         $url = $this->generateUrl('app_login',[], UrlGeneratorInterface::ABSOLUTE_URL);
                         $messageBus->dispatch(new SendPasswordConfirm(self::WEBMASTER,$user->getEmail(),'Mise à jour profil','modification',['user'=>$user,'url'=>$url]));
                         $this->addFlash('alert-success','Profil mis à jour');
-                        return $this->redirectToRoute('app_login');
+                        return $this->redirectToRoute('app_main');
                     }
                 }
             }catch (EntityNotFoundException $e){

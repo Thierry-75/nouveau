@@ -19,11 +19,7 @@ const validateImage = function (input) {
             return retour;
         }
         let allowedExtension = ["jpeg", "jpg"];
-        let fileExtension = document
-            .getElementById("registration_form_portrait")
-            .value.split(".")
-            .pop()
-            .toLowerCase();
+        let fileExtension = input.value.split(".").pop().toLowerCase();
 
         for (let index in allowedExtension) {
             if (fileExtension === allowedExtension[index]) {

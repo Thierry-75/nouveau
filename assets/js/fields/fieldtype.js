@@ -61,6 +61,41 @@ const checkFields = function(champ1,champ2,champ3,bouton)
         bouton.textContent="Saisir"
     }
 }
+const checkFieldsUpdate = function(champ1,champ2,champ3,bouton)
+{
+    if(champ1.classList.contains('border-green-300') && champ2.classList.contains('border-green-300') && champ3.classList.contains('border-green-300'))
+    {
+        bouton.classList.remove('btn-retour');
+        bouton.classList.add('btn-validation');
+        bouton.textContent ="Validez votre saisie";
+    }else if(!champ1.classList.contains('border-green-300') && !champ1.classList.contains('border-red-300') && champ1.value==="" &&
+        !champ2.classList.contains('border-green-300') && !champ2.classList.contains('border-red-300') && champ2.value==="" &&
+        champ3.classList.contains('border-green-300'))
+    {
+        bouton.classList.remove('btn-retour');
+        bouton.classList.add('btn-validation');
+        bouton.textContent ="Validez votre saisie";
+    }else if(champ1.classList.contains('border-green-300') && !champ2.classList.contains('border-green-300') && !champ2.classList.contains('border-red-300')
+        && champ2.value==="" && champ3.classList.contains('border-green-300'))
+    {
+        bouton.classList.remove('btn-retour');
+        bouton.classList.add('btn-validation');
+        bouton.textContent ="Validez votre saisie";
+    }else if(!champ1.classList.contains('border-green-300') && !champ1.classList.contains('border-red-300') && champ1.value ==="" &&
+        champ2.classList.contains('border-green-300') && champ3.classList.contains('border-green-300'))
+    {
+        bouton.classList.remove('btn-retour');
+        bouton.classList.add('btn-validation');
+        bouton.textContent ="Validez votre saisie";
+    }else if(champ1.classList.contains('border-red-300')&& champ1.value !=="" || champ2.classList.contains('border-red-300') && champ2.value!==""
+        || champ3.classList.contains('border-red-300') || champ3.value !==""
+    )
+    {
+        bouton.classList.remove('btn-validation');
+        bouton.classList.add('btn-retour');
+        bouton.textContent ="Modifier le profil";
+    }
+}
 
 const checkFieldsRegister = function(email,pseudo,password,phone,photo,rgpd,bouton){
         if(email.classList.contains('border-green-300') && pseudo.classList.contains('border-green-300') && password.classList.contains('border-green-300')
@@ -88,7 +123,7 @@ const checkCourriel = function(champ,bouton){
 }
 
 const checkPasswords = function(champ1,champ2,bouton){
-        if(champ1.classList.contains('border-green-300')  && champ2.classList.contains('border-green-300') && champ1.value===champ2.value) 
+        if(champ1.classList.contains('border-green-300')  && champ2.classList.contains('border-green-300') && champ1.value===champ2.value)
              {
             message.innerHTML="";
             bouton.classList.remove('btn-retour');
@@ -102,4 +137,5 @@ const checkPasswords = function(champ1,champ2,bouton){
 }
 
 
-export {info,clearRemember,clearField,successBorder,alertBorder,clearBorder,checkFields,redField,greenField,yellowfield,checkFieldsRegister,checkCourriel,checkPasswords} 
+export {info,clearRemember,clearField,successBorder,alertBorder,clearBorder,checkFields,redField,greenField,
+        yellowfield,checkFieldsRegister,checkCourriel,checkPasswords,checkFieldsUpdate}
