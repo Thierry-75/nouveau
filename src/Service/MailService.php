@@ -16,7 +16,7 @@ class MailService
     }
     public function sendMail(string $from, string $to, string $subject, string $template, array $context): void
     {
-        $email = new TemplatedEmail()
+        $email = (new TemplatedEmail())
             ->from($from)
             ->to($to)
             ->subject($subject)

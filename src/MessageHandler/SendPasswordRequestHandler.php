@@ -9,10 +9,10 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 
 #[AsMessageHandler]
-final class SendPasswordRequestHandler
+final readonly class SendPasswordRequestHandler
 {
 
-    public function __construct(private readonly MailerInterface $mailer) {}
+    public function __construct(private MailerInterface $mailer) {}
 
     public function __invoke(SendPasswordRequest $message): void
     {

@@ -3,7 +3,7 @@ import { successBorder,alertBorder } from "./fieldtype.js";
 
 const controlPhone = function (champ)
 {
-     const phoneRegex  = new RegExp('^[0-9]{10,10}$');
+     const phoneRegex  = new RegExp('^[0-9]{10}$');
      if(champ.value.match(phoneRegex) )
      {
           successBorder(champ);

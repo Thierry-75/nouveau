@@ -71,49 +71,49 @@ window.onload = () => {
         let fieldSuccess = [];
         let counter = 0;
         let nbBorder = 0;
-        for (var i = 0; i < inputs.length; i++) {
+        for (let i = 0; i < inputs.length; i++) {
             if (
-                inputs[i].type == "email" ||
-                inputs[i].type == "password" ||
-                inputs[i].type == "checkbox"
+                inputs[i].type === "email" ||
+                inputs[i].type === "password" ||
+                inputs[i].type === "checkbox"
             ) {
                 fieldSuccess[i] = inputs[i];
                 // console.log(fieldSuccess.length);
                 if (
-                    (fieldSuccess[i].type == "email" &&
-                        fieldSuccess[i].value == "") ||
-                    (fieldSuccess[i].type == "email" &&
+                    (fieldSuccess[i].type === "email" &&
+                        fieldSuccess[i].value === "") ||
+                    (fieldSuccess[i].type === "email" &&
                         fieldSuccess[i].classList.contains("border-red-300")) ||
-                    (fieldSuccess[i].type == "password" &&
-                        fieldSuccess[i].value == "") ||
-                    (fieldSuccess[i].type == "password" &&
+                    (fieldSuccess[i].type === "password" &&
+                        fieldSuccess[i].value === "") ||
+                    (fieldSuccess[i].type === "password" &&
                         fieldSuccess[i].classList.contains("border-red-300"))
                 ) {
                     alertBorder(fieldSuccess[i]);
                     counter++;
                 }
                 if (
-                    (fieldSuccess[i].type == "email" &&
-                        !fieldSuccess[i].value == "" &&
+                    (fieldSuccess[i].type === "email" &&
+                        !fieldSuccess[i].value === "" &&
                         fieldSuccess[i].classList.contains(
                             "border-green-300"
                         )) ||
-                    (fieldSuccess[i].type == "password" &&
-                        !fieldSuccess[i].value == "" &&
+                    (fieldSuccess[i].type === "password" &&
+                        !fieldSuccess[i].value === "" &&
                         fieldSuccess[i].classList.contains("border-green-300"))
                 ) {
                     successBorder(fieldSuccess[i]);
                     nbBorder++;
                 }
                 if (
-                    fieldSuccess[i].type == "checkbox" &&
+                    fieldSuccess[i].type === "checkbox" &&
                     !fieldSuccess[i].checked
                 ) {
                     fieldSuccess[i].style.outline = "2px solid #fca5a5";
                     counter++;
                 }
                 if (
-                    fieldSuccess[i].type == "checkbox" &&
+                    fieldSuccess[i].type === "checkbox" &&
                     fieldSuccess[i].checked
                 ) {
                     fieldSuccess[i].style.outline = "2px solid #0cfa40";
@@ -121,7 +121,7 @@ window.onload = () => {
                 }
             }
         }
-        if (!counter == 0 || !fieldSuccess.length == nbBorder) {
+        if (!counter === 0 || !fieldSuccess.length === nbBorder) {
             event.preventDefault();
             event.stopImmediatePropagation();
             return false;

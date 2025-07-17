@@ -6,7 +6,6 @@ use Faker\Factory;
 use App\Entity\User;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Random\RandomException;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserFixtures extends Fixture
@@ -16,7 +15,8 @@ class UserFixtures extends Fixture
     { }
 
     /**
-     * @throws RandomException
+     * @param ObjectManager $manager
+     * @throws \Exception
      */
     public function load(ObjectManager $manager): void
     {
@@ -30,7 +30,7 @@ class UserFixtures extends Fixture
                     ->setCreatedAt(new \DateTimeImmutable())
                     ->setLogin($faker->name())
                     ->setPassword($this->userPasswordHasher->hashPassword($user,'ArethiA75!'))
-                    ->setPhone(random_int(0,1)=== 1 ? $faker->serviceNumber():' ')
+                    ->setPhone(random_int(0,1)=== 1 ? $faker->phoneNumber():' ')
                     ->setIsVerified(true)
                     ->setIsNewsLetter(true)
                     ->setPortrait('default.jpg');

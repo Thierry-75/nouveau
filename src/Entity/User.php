@@ -29,7 +29,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 180)]
     private ?string $email = null;
 
-    #[Assert\Email()]
+    #[Assert\Email]
     private ?string $courriel = null;
     /**
      * @var list<string> The user roles
@@ -49,7 +49,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column(length: 30)]
-    #[Assert\Regex( 
+    #[Assert\Regex(
         pattern: '/^.{3,27}#[0-9]{2}$/'
         )]
     private ?string $login = null;

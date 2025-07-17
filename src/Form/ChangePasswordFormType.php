@@ -11,7 +11,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Sequentially;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
-use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
 class ChangePasswordFormType extends AbstractType
@@ -36,7 +35,7 @@ class ChangePasswordFormType extends AbstractType
                     ],
                     'label' => 'Mot de passe',
                 ],
-                'second_options' => [ 
+                'second_options' => [
                     'label' => 'Confimation',
                 ],
                 'invalid_message' => 'The password fields must match.',
@@ -49,10 +48,12 @@ class ChangePasswordFormType extends AbstractType
 
     }
 
-    public function addData(PostSubmitEvent $event)
+    public function addData(PostSubmitEvent $event): void
     {
         $data = $event->getData();
-        if(!$data instanceof User) return;
+        if(!$data instanceof User) {
+            return;
+        }
         $data->setUpdatedAt(new  \DateTimeImmutable());
     }
 

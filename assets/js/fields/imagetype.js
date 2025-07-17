@@ -10,7 +10,7 @@ const validateImage = function (input) {
         let reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onload = function () {
-            if (reader.readyState == 2) {
+            if (reader.readyState === 2) {
                 document.getElementById("image").src = reader.result;
             }
         };
@@ -19,18 +19,18 @@ const validateImage = function (input) {
             return retour;
         }
         let allowedExtension = ["jpeg", "jpg"];
-        var fileExtension = document
+        let fileExtension = document
             .getElementById("registration_form_portrait")
             .value.split(".")
             .pop()
             .toLowerCase();
 
-        for (var index in allowedExtension) {
+        for (let index in allowedExtension) {
             if (fileExtension === allowedExtension[index]) {
             retour = true;
                 break;
             }
-        
+
         }
         return retour;
     }

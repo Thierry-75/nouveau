@@ -9,14 +9,17 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class PhotoService
 {
-    private $params;
+    private ParameterBagInterface $params;
 
     public function __construct(ParameterBagInterface $params)
     {
         $this->params = $params;
     }
 
-    public function add(UploadedFile $picture,String $name, ?string $folder = '', ?int $width = 250, ?int $height = 250)
+    /**
+     * @throws Exception
+     */
+    public function add(UploadedFile $picture, String $name, ?string $folder = '', ?int $width = 250, ?int $height = 250): string
     {
         // On donne un nouveau nom à l'image
         $fichier = $name . '.webp';
@@ -76,7 +79,9 @@ class PhotoService
 
         // On crée le dossier de destination s'il n'existe pas
         if(!file_exists($path . '/mini/')){
-            mkdir($path . '/mini/', 0755, true);
+            if (!mkdir($concurrentDirectory = $path . '/mini/', 0755, true) && !is_dir($concurrentDirectory)) {
+                throw new \RuntimeException(sprintf('Directory "%s" was not created', $concurrentDirectory));
+            }
         }
 
         // On stocke l'image recadrée
@@ -87,19 +92,19 @@ class PhotoService
         return $fichier;
     }
 
-    public function delete(string $fichier, ?string $folder = '', ?int $width = 250, ?int $height = 250)
+    public function delete(string $fichier, ?string $folder = '', ?int $width = 250, ?int $height = 250): bool
     {
         if($fichier !== 'default.webp'){
             $success = false;
             $path = $this->params->get('image_directory') . $folder;
-            
+
 
             $original = $path . '/' . $fichier;
             if(file_exists($original)){
                 unlink($original);
                 $success = true;
             }
-            
+
             $mini = $path . '/mini/' . $width . 'x' . $height . '-' . $fichier;
             if(file_exists($mini)){
                 unlink($mini);

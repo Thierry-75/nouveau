@@ -314,7 +314,6 @@ window.onload = () => {
         registration_form_phone.addEventListener("input", function () {
             if (controlPhone(this) === false) {
                 let text = "N° de téléphone erroné";
-                allowPhoto;
                 redField(allowPhone, text);
             } else if (controlPhone(this) === true) {
                 let text = "Téléphone OK";
@@ -371,11 +370,11 @@ window.onload = () => {
             );
         });
         registration_form_portrait.addEventListener("change", function () {
-            if (validateImage(this) == true) {
+            if (validateImage(this) === true) {
                 successBorder(this);
                 let text = "Photo OK";
                 greenField(allowPhoto, text);
-            } else if (validateImage(this) != true || this.value == " ") {
+            } else if (validateImage(this) !== true || this.value === " ") {
                 let text = "Photo erronée";
                 redField(allowPhoto, text);
                 alertBorder(this);
@@ -391,11 +390,11 @@ window.onload = () => {
             );
         });
         registration_form_portrait.addEventListener("blur", function () {
-            if (validateImage(this) == true) {
+            if (validateImage(this) === true) {
                 successBorder(this);
                 let text = "Photo OK";
                 greenField(allowPhoto, text);
-            } else if (validateImage(this) != true || this.value == " ") {
+            } else if (validateImage(this) !== true || this.value === " ") {
                 let text = "Photo erronée";
                 redField(allowPhoto, text);
                 alertBorder(this);
@@ -429,11 +428,11 @@ window.onload = () => {
             );
         });
         registration_form_agreeTerms.addEventListener("input", function () {
-            if (controlRemember(this) == false) {
+            if (controlRemember(this) === false) {
                 alertBorder(this);
                 let text = "RGPD obligatoire";
                 redField(allowAgreeTerms, text);
-            } else if (controlRemember(this) == true) {
+            } else if (controlRemember(this) === true) {
                 successBorder(this);
                 let text = "RGPD OK";
                 greenField(allowAgreeTerms, text);
@@ -451,11 +450,11 @@ window.onload = () => {
             );
         });
         registration_form_agreeTerms.addEventListener("blur", function () {
-            if (controlRemember(this) == false) {
+            if (controlRemember(this) === false) {
                 alertBorder(this);
                 let text = "RGPD obligatoire";
                 redField(allowAgreeTerms, text);
-            } else if (controlRemember(this) == true) {
+            } else if (controlRemember(this) === true) {
                 successBorder(this);
                 let text = "RGPD OK";
                 greenField(allowAgreeTerms, text);
@@ -485,11 +484,11 @@ window.onload = () => {
             let champSuccess = [];
             for (let j = 0; j < inputs.length; j++) {
                 if (
-                    inputs[j].type == "email" ||
-                    inputs[j].type == "text" ||
-                    inputs[j].type == "password" ||
-                    inputs[j].type == "file" ||
-                    inputs[j].type == "checkbox"
+                    inputs[j].type === "email" ||
+                    inputs[j].type === "text" ||
+                    inputs[j].type === "password" ||
+                    inputs[j].type === "file" ||
+                    inputs[j].type === "checkbox"
                 ) {
                     champSuccess[j] = inputs[j];
                 }
@@ -497,16 +496,16 @@ window.onload = () => {
             for (let i = 0; i < champSuccess.length; i++) {
                 /** type email */
                 if (
-                    (champSuccess[i].type == "email" &&
-                        champSuccess[i].value == "") ||
-                    (champSuccess[i].type == "email" &&
+                    (champSuccess[i].type === "email" &&
+                        champSuccess[i].value === "") ||
+                    (champSuccess[i].type === "email" &&
                         champSuccess[i].classList.contains("border-red-300"))
                 ) {
                     alertBorder(champSuccess[i]);
                     compteur++;
                 } else if (
-                    champSuccess[i].type == "email" &&
-                    !champSuccess[i].value == "" &&
+                    champSuccess[i].type === "email" &&
+                    !champSuccess[i].value === "" &&
                     champSuccess[i].classList.contains("border-green-300")
                 ) {
                     successBorder(champSuccess[i]);
@@ -515,16 +514,16 @@ window.onload = () => {
                 /** type text */
 
                 if (
-                    (champSuccess[i].type == "text" &&
-                        champSuccess[i].value == "") ||
-                    (champSuccess[i].type == "text" &&
+                    (champSuccess[i].type === "text" &&
+                        champSuccess[i].value === "") ||
+                    (champSuccess[i].type === "text" &&
                         champSuccess[i].classList.contains("border-red-300"))
                 ) {
                     alertBorder(champSuccess[i]);
                     compteur++;
                 } else if (
-                    champSuccess[i].type == "text" &&
-                    !champSuccess[i].value == "" &&
+                    champSuccess[i].type === "text" &&
+                    !champSuccess[i].value === "" &&
                     champSuccess[i].classList.contains("border-green-300")
                 ) {
                     successBorder(champSuccess[i]);
@@ -533,16 +532,16 @@ window.onload = () => {
 
                 /**type password */
                 if (
-                    (champSuccess[i].type == "password" &&
-                        champSuccess[i].value == "") ||
-                    (champSuccess[i].type == "password" &&
+                    (champSuccess[i].type === "password" &&
+                        champSuccess[i].value === "") ||
+                    (champSuccess[i].type === "password" &&
                         champSuccess[i].classList.contains("border-red-300"))
                 ) {
                     alertBorder(champSuccess[i]);
                     compteur++;
                 } else if (
-                    champSuccess[i].type == "password" &&
-                    !champSuccess[i].value == "" &&
+                    champSuccess[i].type === "password" &&
+                    !champSuccess[i].value === "" &&
                     champSuccess[i].classList.contains("border-green-300")
                 ) {
                     successBorder(champSuccess[i]);
@@ -551,13 +550,13 @@ window.onload = () => {
 
                 /** type file */
                 if (
-                    champSuccess[i].type == "file" &&
+                    champSuccess[i].type === "file" &&
                     !champSuccess[i].classList.contains("border-green-300")
                 ) {
                     alertBorder(champSuccess[i]);
                     compteur++;
                 } else if (
-                    champSuccess[i].type == "file" &&
+                    champSuccess[i].type === "file" &&
                     champSuccess[i].classList.contains("border-green-300")
                 ) {
                     successBorder(champSuccess[i]);
@@ -566,7 +565,7 @@ window.onload = () => {
 
                 /** type checkbox */
                 if (
-                    champSuccess[i].type == "checkbox" &&
+                    champSuccess[i].type === "checkbox" &&
                     !champSuccess[i].checked
                 ) {
                     champSuccess[i].classList.remove(
@@ -576,7 +575,7 @@ window.onload = () => {
                     champSuccess[i].style.outline = "2px solid #FCA5A5";
                     compteur++;
                 } else if (
-                    champSuccess[i].type == "checkbox" &&
+                    champSuccess[i].type === "checkbox" &&
                     champSuccess[i].checked
                 ) {
                     champSuccess[i].classList.remove(
@@ -590,8 +589,8 @@ window.onload = () => {
 
             if (
                 !registration_form_agreeTerms.checked ||
-                !compteur == 0 ||
-                !champSuccess.length == nbBordure
+                !compteur === 0 ||
+                !champSuccess.length === nbBordure
             ) {
                 e.preventDefault();
                 e.stopImmediatePropagation();

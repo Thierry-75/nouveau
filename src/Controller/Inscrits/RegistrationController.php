@@ -5,7 +5,6 @@ namespace App\Controller\Inscrits;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Form\UpdateProfilUserFormType;
-use App\Message\SendActivationMessage;
 use App\Message\SendPasswordConfirm;
 use App\Repository\UserRepository;
 use App\Service\IntraController;
@@ -16,6 +15,7 @@ use Doctrine\ORM\EntityNotFoundException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Messenger\Exception\ExceptionInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
@@ -30,6 +30,7 @@ class RegistrationController extends AbstractController
 
     /**
      * @throws \Exception
+     * @throws ExceptionInterface
      */
     #[Route('/register', name: 'app_register',methods: ['GET','POST'])]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager,
@@ -98,11 +99,13 @@ class RegistrationController extends AbstractController
     public function showProfil(User $user): Response
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
+
         return $this->render('registration/index.html.twig',['user'=>$user]);
     }
 
     /**
      * @throws \Exception
+     * @throws ExceptionInterface
      */
     #[Route('/profil/update/{id}', name: 'app_profil_update', methods: ['GET','POST'])]
     public function updateProfil(Request $request, User $user,EntityManagerInterface $entityManager,ValidatorInterface $validator,
@@ -127,14 +130,23 @@ class RegistrationController extends AbstractController
                  ->setEmail($user->getEmail())
                 ->setRoles($user->getRoles())
                 ->setIsVerified($user->IsVerified())
-                ->setIsNewsLetter($user->IsNewsLetter())
-                ->setLogin($form->get('login')->getData())
-                ->setPhone($form->get('phone')->getData());
+                ->setIsNewsLetter($user->IsNewsLetter());
+                if($form->get('login')->getData()!==null){
+                    $user->setLogin($form->get('login')->getData());
+                }else{
+                    $user->setLogin($user->getLogin());
+
+                }
+                if($form->get('phone')->getData()!==null){
+                    $user->setPhone($form->get('phone')->getData());
+                }else{
+                    $user->setPhone($user->getPhone());
+                }
             try{
                 if($form->get('portrait')->getData() !== null){
                     $image = $form->get('portrait')->getData();
                     if($image->getClientOriginalExtension() === 'jpeg' || $image->getClientOriginalExtension() === 'jpg'){
-                        $portrait = $photoService->add($image, $user->getEmail(), self::USERS, 512, 512);
+                        $portrait = $photoService->add($image, $user->getEmail(), self::USERS, 512, 768);
                         $user->setPortrait($portrait);
                         $entityManager->persist($user);
                         $entityManager->flush();

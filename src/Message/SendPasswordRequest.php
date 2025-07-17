@@ -5,7 +5,7 @@ namespace App\Message;
 use Symfony\Component\Messenger\Attribute\AsMessage;
 
 #[AsMessage('async')]
-final class SendPasswordRequest
+final readonly class SendPasswordRequest
 {
     /**
      * @param string $from

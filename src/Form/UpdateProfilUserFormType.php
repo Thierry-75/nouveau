@@ -22,15 +22,13 @@ class UpdateProfilUserFormType extends AbstractType
     {
         $builder
             ->add('login',TextType::class,['attr'=>['class'=>'input-gray mt-1 mb-1'],'label'=>'Identifiant',
+                'required'=>false,
                 'label_attr'=>['class'=>'text-cyan-800 text-xs mb-0'],
                 'constraints'=>[
                     new Sequentially([
-                        new Sequentially([
-                            new NotBlank(),
                             new Regex(
                                 pattern:"/^.{3,27}#[0-9]{2}$/i",
                                 htmlPattern:"^.{3,27}#[0-9]{2}$")
-                        ])
                     ])
                 ]
                 ])
@@ -39,7 +37,6 @@ class UpdateProfilUserFormType extends AbstractType
                 'label_attr'=>['class'=>'text-cyan-800 text-xs mb-0'],
                 'constraints'=>[
                     new Sequentially([
-                        new NotBlank(),
                         new Regex(
                             pattern: "/^0[1-9]([-. ]?[0-9]{2}){4}$/",
                             htmlPattern: "^0[1-9]([-. ]?[0-9]{2}){4}$"
@@ -59,10 +56,10 @@ class UpdateProfilUserFormType extends AbstractType
                     new Sequentially([
                         new NotBlank(),
                         new Image(
-                            minWidth: '1920',
-                            maxWidth: '1920',
-                            maxHeight: '1080',
-                            minHeight: '1080'
+                            minWidth: '660',
+                            maxWidth: '1380',
+                            maxHeight: '2050',
+                            minHeight: '999'
                         ),
                         new File(
                             maxSize:'2M',
@@ -81,7 +78,9 @@ class UpdateProfilUserFormType extends AbstractType
     public function addData(PostSubmitEvent $event): void
     {
         $data = $event->getData();
-        if (!($data instanceof User)) return;
+        if (!($data instanceof User)) {
+            return;
+        }
         $data->setUpdatedAt(new \DateTimeImmutable());
     }
     public function configureOptions(OptionsResolver $resolver): void
