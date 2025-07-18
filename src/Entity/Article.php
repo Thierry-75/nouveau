@@ -20,11 +20,17 @@ class Article
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
-    #[ORM\Column(type: Types::TEXT)]
-    private ?string $content = null;
-
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $introduction = null;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $developpement = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $conclusion = null;
 
     public function getId(): ?int
     {
@@ -55,18 +61,6 @@ class Article
         return $this;
     }
 
-    public function getContent(): ?string
-    {
-        return $this->content;
-    }
-
-    public function setContent(string $content): static
-    {
-        $this->content = $content;
-
-        return $this;
-    }
-
     public function getSlug(): ?string
     {
         return $this->slug;
@@ -75,6 +69,42 @@ class Article
     public function setSlug(string $slug): static
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getIntroduction(): ?string
+    {
+        return $this->introduction;
+    }
+
+    public function setIntroduction(?string $introduction): static
+    {
+        $this->introduction = $introduction;
+
+        return $this;
+    }
+
+    public function getDeveloppement(): ?string
+    {
+        return $this->developpement;
+    }
+
+    public function setDeveloppement(string $developpement): static
+    {
+        $this->developpement = $developpement;
+
+        return $this;
+    }
+
+    public function getConclusion(): ?string
+    {
+        return $this->conclusion;
+    }
+
+    public function setConclusion(?string $conclusion): static
+    {
+        $this->conclusion = $conclusion;
 
         return $this;
     }
