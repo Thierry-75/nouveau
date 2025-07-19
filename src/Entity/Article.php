@@ -2,15 +2,20 @@
 
 namespace App\Entity;
 
+use App\Entity\Trait\SluggerTrait;
 use App\Repository\ArticleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
+#[UniqueEntity('title',message: 'Ce titre existe déjà !')]
 class Article
 {
+    use SluggerTrait;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -21,9 +26,6 @@ class Article
 
     #[ORM\Column(length: 255)]
     private ?string $title = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $slug = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $introduction = null;
@@ -70,18 +72,6 @@ class Article
     public function setTitle(string $title): static
     {
         $this->title = $title;
-
-        return $this;
-    }
-
-    public function getSlug(): ?string
-    {
-        return $this->slug;
-    }
-
-    public function setSlug(string $slug): static
-    {
-        $this->slug = $slug;
 
         return $this;
     }

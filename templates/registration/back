@@ -1,0 +1,26 @@
+
+
+                'constraints'=>[
+                    new Sequentially([
+                        new Count(
+                            min: 3,
+                            max: 3,
+                            minMessage: '3 photos SVP',
+                            maxMessage: '3 photos SVP',
+
+                        ),
+                        new Image(
+                            minWidth: '1920',
+                            maxWidth: '3840',
+                            maxHeight: '2160',
+                            minHeight: '1080'
+                        ),
+                        new File(
+                            maxSize:'2M',
+                            maxSizeMessage:'Max 2 Mo',
+                            extensions:['jpeg','jpg'],
+                            extensionsMessage:'Image de type jpeg/jpg',
+                            filenameMaxLength: 3
+                        )
+                    ])
+                ]

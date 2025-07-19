@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\PhotoRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: PhotoRepository::class)]
 class Photo
@@ -18,6 +19,17 @@ class Photo
 
     #[ORM\ManyToOne(inversedBy: 'photos')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\File(
+        maxSize: '2M',maxSizeMessage: 'Max 2Mo',extensions: ['jpg','jpeg'],extensionsMessage: 'Image type jpg/jpeg'
+    )]
+    #[Assert\Image(
+        minWidth: '1920',
+        maxWidth: '3840',
+        maxHeight: '2160',
+        minHeight: '1080',
+        allowLandscape: true,
+        allowLandscapeMessage: 'Format portrait',
+    )]
     private ?Article $article = null;
 
     public function getId(): ?int
