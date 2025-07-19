@@ -16,5 +16,5 @@ return [
     Symfony\WebpackEncoreBundle\WebpackEncoreBundle::class => ['all' => true],
     Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class => ['dev' => true, 'test' => true],
     Symfony\UX\Dropzone\DropzoneBundle::class => ['all' => true],
-    Eckinox\TinymceBundle\TinymceBundle::class => ['all' => true],
+    EmilePerron\TinymceBundle\TinymceBundle::class => ['all' => true],
 ];

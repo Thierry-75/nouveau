@@ -3,56 +3,67 @@
 namespace App\Form;
 
 use App\Entity\Article;
-use Eckinox\TinymceBundle\Form\Type\TinymceType;
+
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Event\PostSubmitEvent;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use EmilePerron\TinymceBundle\Form\Type\TinymceType;
 
 class ArticleFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('createdAt', null, [
-                'widget' => 'single_text',
-            ])
-            ->add('title',TextType::class)
+
+            ->add('title',TextType::class,['attr'=>['class'=>'w-full px-3 py-3 mb-3 text-xl rounded-lg shadow-sm','required'=>true],
+            'label'=>"Titre",
+            'label_attr'=> ['class' => 'block text-lg font-medium text-cyan-800 mb-1']]
+            )
             ->add('introduction',TinymceType::class, [
                     'attr' => [
-                        'class' => 'input-gray',
+                        'class' => 'input-gray text-lg mb-3',
                         'required' => true,
                         'toolbar' => 'undo redo | bold italic | forecolor backcolor | template | alignleft aligncenter alignright alignjustify | bullist numlist | link | spellchecker',
-                        'id' => 'article_form_content',
-                        'height' => 390
+                        'id' => 'article_form_introduction',
+                        'height' => 225
                     ],
-                    'label' => 'Corps de l\'article :',
-                    'label_attr' => ['class' => 'block text-lg font-medium text-gray-800 mb-1']]
+                    'label' => 'Introduction :',
+                    'label_attr' => ['class' => 'block text-lg font-medium text-cyan-800 mb-1']]
             )
             ->add('developpement',TinymceType::class, [
                     'attr' => [
-                        'class' => 'input-gray',
+                        'class' => 'input-gray text-lg mb-3',
                         'required' => true,
                         'toolbar' => 'undo redo | bold italic | forecolor backcolor | template | alignleft aligncenter alignright alignjustify | bullist numlist | link | spellchecker',
-                        'id' => 'article_form_content',
-                        'height' => 390
+                        'id' => 'article_form_developpement',
+                        'height' => 300
                     ],
                     'label' => 'Corps de l\'article :',
-                    'label_attr' => ['class' => 'block text-lg font-medium text-gray-800 mb-1']]
+                    'label_attr' => ['class' => 'block text-lg font-medium text-cyan-800 mb-1']]
             )
             ->add('conclusion',TinymceType::class, [
                     'attr' => [
-                        'class' => 'input-gray',
+                        'class' => 'input-gray text-lg mb-3',
                         'required' => true,
                         'toolbar' => 'undo redo | bold italic | forecolor backcolor | template | alignleft aligncenter alignright alignjustify | bullist numlist | link | spellchecker',
-                        'id' => 'article_form_content',
-                        'height' => 390
+                        'id' => 'article_form_conclusion',
+                        'height' => 225
                     ],
-                    'label' => 'Corps de l\'article :',
-                    'label_attr' => ['class' => 'block text-lg font-medium text-gray-800 mb-1']]
+                    'label' => 'Conclusion :',
+                    'label_attr' => ['class' => 'block text-lg font-medium text-cyan-800 mb-1']]
             )
+            ->add('photos',FileType::class, options: [
+                'multiple'=>true,
+                'mapped'=>false,
+                'attr'=>['class'=>'w-full bg-white py-3 px-3 text-xl mb-3 rounded-lg shadow-sm','required'=>true],
+                'label'=>'Télécharger 3 photos',
+                'label_attr' => ['class' => 'block text-lg font-medium text-cyan-800 mb-1']
+            ])
             ->addEventListener(FormEvents::POST_SUBMIT, $this->addDate(...))
         ;
     }

@@ -61,12 +61,16 @@
 
         /** Inputs class **/
         .input-gray {
-          @apply my-5 shadow-sm rounded-md bg-neutral-50  text-sm p-4 md:p-2 block mt-1 w-full;
+          @apply my-5 shadow-sm rounded-md bg-neutral-50 text-sm p-4 md:p-2 block mt-1 w-full;
         }
-        .input-white {
-        @apply my-5 shadow-sm rounded-md bg-gray-50  text-sm p-4 md:p-2 block mt-1 w-full;
+        .input-toto {
+        @apply my-5 shadow-sm rounded-md bg-gray-50 text-sm p-4 md:p-2 block mt-1 w-full;
         }
   }
+
+#file-upload-button{
+    background-color: #187490 !important;
+}
 
   #allowEmail{
   display: none;

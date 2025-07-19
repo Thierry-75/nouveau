@@ -3,8 +3,8 @@
 namespace App\Controller\Redaction;
 
 use App\Entity\Article;
+use App\Entity\Photo;
 use App\Form\ArticleFormType;
-use App\Service\IntraController;
 use App\Service\PhotoService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,7 +15,11 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 final class ArticleController extends AbstractController
-{#[Route('/article/', name: 'app_article_index', methods:['POST','GET'])]
+{
+    protected const USERS = "articles";
+    protected const WEBMASTER = 'webmaster@my-domain.org';
+
+    #[Route('/article/', name: 'app_article_index', methods:['POST','GET'])]
     public function index(): Response
     {
         return $this->render('article/index.html.twig', [
@@ -25,7 +29,8 @@ final class ArticleController extends AbstractController
 
     #[Route('/article/add', name: 'app_article_add', methods:['POST','GET'])]
     public function addArticle(Request $request, ValidatorInterface $validator,
-                               EntityManagerInterface $manager): Response
+                               EntityManagerInterface $manager,PhotoService $photoService
+    ): Response
     {
         $article = new Article();
         $form = $this->createForm(ArticleFormType::class,$article);
@@ -38,6 +43,16 @@ final class ArticleController extends AbstractController
                 ]);
             }
             if($form->isSubmitted() && $form->isValid()){
+                $photos = $form->get('photos')->getData();
+                $count = 0;
+                foreach ($photos as $photo){
+                    $fichier = $photoService->add($photo,$article->getSlug().'-n°-'.$count,self::USERS,1024,768);
+                    $image = new Photo();
+                    $image->setName($fichier);
+                    $article->addPhoto($image);
+                    $count++;
+                }
+
                 $manager->persist($article);
                 $manager->flush();
                 $this->addFlash('alert-success','Article créé !');
