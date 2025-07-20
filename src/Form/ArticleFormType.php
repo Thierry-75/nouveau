@@ -25,9 +25,9 @@ class ArticleFormType extends AbstractType
     {
         $builder
 
-            ->add('title',TextType::class,['attr'=>['class'=>'w-full px-3 py-3 mb-3 text-xl rounded-lg shadow-md shadow-black'],
+            ->add('title',TextType::class,['attr'=>['class'=>'w-full mt-1 px-2 py-2 text-xl border-2 border-neutral-200 rounded-lg shadow-sm shadow-black'],
             'label'=>"Titre",
-            'label_attr'=> ['class' => 'block text-lg font-medium text-cyan-800 mb-1'],
+            'label_attr'=> ['class' => 'block text-lg font-medium text-cyan-800 mb-1 ml-2'],
             'constraints'=>[
                 new NotBlank(message: 'Titre obligatoire !')
             ]
@@ -35,23 +35,23 @@ class ArticleFormType extends AbstractType
             )
             ->add('introduction',TinymceType::class, [
                     'attr' => [
-                        'class' => 'input-gray text-lg mb-3',
+                        'class' => 'input-gray text-lg px-3 py-3 mb-4',
                         'toolbar' => 'undo redo | bold italic | forecolor backcolor | template | alignleft aligncenter alignright alignjustify | bullist numlist | link | spellchecker',
                         'id' => 'article_form_introduction',
                         'height' => 225
                     ],
-                    'label' => 'Introduction :',
-                    'label_attr' => ['class' => 'block text-lg font-medium text-cyan-800 mb-1']]
+                    'label' => 'Introduction',
+                    'label_attr' => ['class' => 'block text-lg font-medium text-cyan-800 mb-1 ml-2']]
             )
             ->add('developpement',TinymceType::class, [
                     'attr' => [
-                        'class' => 'input-gray text-lg mb-3',
+                        'class' => 'input-gray text-lg mb-4',
                         'toolbar' => 'undo redo | bold italic | forecolor backcolor | template | alignleft aligncenter alignright alignjustify | bullist numlist | link | spellchecker',
                         'id' => 'article_form_developpement',
                         'height' => 300
                     ],
                     'label' => 'Développement:',
-                    'label_attr' => ['class' => 'block text-lg font-medium text-cyan-800 mb-1'],
+                    'label_attr' => ['class' => 'block text-lg font-medium text-cyan-800 mb-1 ml-2'],
                       'constraints'=>[
                       new NotBlank(message: 'Développement obligatoire ')
                     ]
@@ -59,26 +59,26 @@ class ArticleFormType extends AbstractType
             )
             ->add('conclusion',TinymceType::class, [
                     'attr' => [
-                        'class' => 'input-gray text-lg mb-3',
+                        'class' => 'input-gray text-lg px-3 py-3 mb-4',
                         'toolbar' => 'undo redo | bold italic | forecolor backcolor | template | alignleft aligncenter alignright alignjustify | bullist numlist | link | spellchecker',
                         'id' => 'article_form_conclusion',
                         'height' => 225
                     ],
-                    'label' => 'Conclusion :',
-                    'label_attr' => ['class' => 'block text-lg font-medium text-cyan-800 mb-1']
+                    'label' => 'Conclusion',
+                    'label_attr' => ['class' => 'block text-lg font-medium text-cyan-800 mb-1 ml-2']
 
                 ])
             ->add('photos',FileType::class, options: [
                 'multiple'=>true,
                 'mapped'=>false,
-                'attr'=>['class'=>'w-full bg-white py-3 px-3 text-xl mb-3 rounded-lg shadow-md shadow-black'],
+                'attr'=>['class'=>'w-full bg-white px-3 py-3.5 mt-3 mb-4 text-xl rounded-lg shadow-md shadow-black'],
                 'label'=>'Télécharger 3 photos',
-                'label_attr' => ['class' => 'block text-lg font-medium text-cyan-800 mb-1'],
+                'label_attr' => ['class' => 'block text-lg font-medium text-cyan-800 mb-1 ml-2'],
                 'constraints'=>[
                     new Sequentially([
-                        new NotBlank(message: 'obligatoire'),
+                        new NotBlank(message: '3 Photos '),
                         new Count(
-                            min: 3,
+                            min: 1,
                             max: 3,
                             exactMessage: '3 photos !',
                             minMessage: '3 photos SVP',

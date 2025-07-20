@@ -28,7 +28,7 @@ class Photo
         maxHeight: '2160',
         minHeight: '1080',
         allowLandscape: true,
-        allowLandscapeMessage: 'Format portrait',
+        allowLandscapeMessage: 'Format paysage !',
     )]
     private ?Article $article = null;
 

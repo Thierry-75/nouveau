@@ -1,10 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Article ajout!{% endblock %}
+{% block title %}Article ajout {% endblock %}
+
+{% block importmap %}
+    {{ importmap(['addArticle']) }}
+{% endblock %}
 
 {% block body %}
-    <div class="flex items-center justify-center p-12 mt-2">
-
+    <div class="flex items-center justify-center p-2 mt-2">
         <div class="mx-auto w-full max-w-full">
             <h3 class="text-3xl font-semibold text-center text-cyan-800 mb-5">Nouvel Article</h3>
             {{ form_start(form_article_new,{attr:
@@ -17,19 +20,21 @@
                 <div class="mb-5">
                     <div class="text-md text-cyan-700 text-left">
                         {{ form_label(form_article_new.title) }}
-                        <div class="text-red-600 text-center">
+                        <div class="text-red-600 text-center" id="error_title">
                         {{ form_errors(form_article_new.title) }}
                         </div>
                     </div>
+                    <div class="shadow-sm py-2.5 px-2 bg-neutral-50 rounded-md">
                     {{ form_widget(form_article_new.title) }}
+                    </div>
                 </div>
 
             </div>
             <div>
                 <div class="mb-5">
-                    <div class="text-md text-cyan-700 text-left">
+                    <div class="text-md text-cyan-700 text-left" >
                         {{ form_label(form_article_new.introduction) }}
-                        <div class="text-red-600 text-center">
+                        <div class="text-red-600 text-center" id="error_introduction">
                             {{ form_errors(form_article_new.introduction) }}
                         </div>
                     </div>
@@ -41,7 +46,7 @@
                 <div class="mb-5">
                     <div class="text-md text-cyan-700 text-left">
                         {{ form_label(form_article_new.developpement) }}
-                        <div class="text-red-600 text-center">
+                        <div class="text-red-600 text-center" id="error_developpement">
                             {{ form_errors(form_article_new.developpement) }}
                         </div>
                     </div>
@@ -53,7 +58,7 @@
                 <div class="mb-5">
                     <div class="text-md text-cyan-700 text-left">
                         {{ form_label(form_article_new.conclusion) }}
-                        <div class="text-red-600 text-center">
+                        <div class="text-red-600 text-center" id="error_conclusion">
                             {{ form_errors(form_article_new.conclusion) }}
                         </div>
                     </div>
@@ -64,24 +69,34 @@
             <div class="mb-5">
                 <div class="text-md text-cyan-700 text-left">
                     {{ form_label(form_article_new.photos) }}
-                    <div class="text-red-600 text-center">
+                    <div class="text-red-600 text-center" id="error_photos">
+                        <p class="text-center" id="error"></p>
                         {{ form_errors(form_article_new.photos) }}
                     </div>
                 </div>
+                <div class="shadow-sm py-1.5 px-2 bg-neutral-50 rounded-md">
                 {{ form_widget(form_article_new.photos) }}
+                </div>
             </div>
 
 
-
-
-
-
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mt-10 mb-8">
+                <div>
+                    <img id="image0" class="h-auto max-w-full rounded-lg" src="" alt="" />
+                </div>
+                <div>
+                    <img id="image1" class="h-auto max-w-full rounded-lg" src="" alt="" />
+                </div>
+                <div>
+                    <img id="image2" class="h-auto max-w-full rounded-lg" src="" alt="" />
+                </div>
+            </div>
             <div>
                     <button
-                        class="btn-retour py-3.5 text-lg" id="form_article_new_submit">
+                        class="btn-retour py-3.5 text-lg mt-5" id="form_article_new_submit">
                         Nouvel Article
                     </button>
-                </div>
+            </div>
             {{ form_end(form_article_new) }}
         </div>
     </div>

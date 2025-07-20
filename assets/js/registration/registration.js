@@ -51,7 +51,10 @@ window.onload = () => {
         let information = "Indiquez votre adresse email";
         info(message, information);
 
-        /** Email  */ const image = registration_form.querySelector("#image");
+        const image = registration_form.querySelector("#image");
+
+
+        /** Email  */
         const registration_form_email = registration_form.querySelector(
             "#registration_form_email"
         );
@@ -369,12 +372,13 @@ window.onload = () => {
                 registration_form_submit
             );
         });
-        registration_form_portrait.addEventListener("change", function () {
-            if (validateImage(this) === true) {
+        registration_form_portrait.addEventListener("input", function () {
+            let num =0;
+            if (validateImage(this,num)) {
                 successBorder(this);
                 let text = "Photo OK";
                 greenField(allowPhoto, text);
-            } else if (validateImage(this) !== true || this.value === " ") {
+            } else if (!(validateImage(this,num)) || this.files.length === 0) {
                 let text = "Photo erronée";
                 redField(allowPhoto, text);
                 alertBorder(this);
@@ -390,11 +394,12 @@ window.onload = () => {
             );
         });
         registration_form_portrait.addEventListener("blur", function () {
-            if (validateImage(this) === true) {
+            let num =0;
+            if (validateImage(this,num)) {
                 successBorder(this);
                 let text = "Photo OK";
                 greenField(allowPhoto, text);
-            } else if (validateImage(this) !== true || this.value === " ") {
+            } else if (!(validateImage(this,num)) || this.files.length === 0) {
                 let text = "Photo erronée";
                 redField(allowPhoto, text);
                 alertBorder(this);

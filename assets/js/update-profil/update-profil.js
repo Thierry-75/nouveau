@@ -91,7 +91,7 @@ window.onload = () =>{
             if(this.value !==""){
                 if (controlPhone(this) === false) {
                     let text = "N° de téléphone erroné";
-                    redField(allowPhone, text);update_profil_user_form_portrait
+                    redField(allowPhone, text);
                 } else if (controlPhone(this) === true) {
                     let text = "Téléphone OK";
                     greenField(allowPhone, text);
@@ -111,31 +111,29 @@ window.onload = () =>{
         });
 
         update_profil_user_form_portrait.addEventListener('change',function(){
-            if(this.value!==""){
-                if (validateImage(this) === true) {
-                    successBorder(this);
-                    let text = "Photo OK";
-                    greenField(allowPhoto, text);
-                } else if (validateImage(this) !== true || this.value === " ") {
-                    let text = "Photo erronée";
-                    redField(allowPhoto, text);
-                    alertBorder(this);
-                }
+            let num =0;
+            if (validateImage(this,num)) {
+                successBorder(this);
+                let text = "Photo OK";
+                greenField(allowPhoto, text);
+            } else if (!(validateImage(this,num)) || this.files.length === 0) {
+                let text = "Photo erronée";
+                redField(allowPhoto, text);
+                alertBorder(this);
             }
             checkFieldsUpdate(update_profil_user_form_login,update_profil_user_form_phone,update_profil_user_form_portrait,modification_form_submit);
         });
 
         update_profil_user_form_portrait.addEventListener('blur',function(){
-            if(this.value!==""){
-                if (validateImage(this) === true) {
-                    successBorder(this);
-                    let text = "Photo OK";
-                    greenField(allowPhoto, text);
-                } else if (validateImage(this) !== true || this.value === " ") {
-                    let text = "Photo erronée";
-                    redField(allowPhoto, text);
-                    alertBorder(this);
-                }
+            let num =0;
+            if (validateImage(this,num)) {
+                successBorder(this);
+                let text = "Photo OK";
+                greenField(allowPhoto, text);
+            } else if (!(validateImage(this,num)) || this.files.length === 0) {
+                let text = "Photo erronée";
+                redField(allowPhoto, text);
+                alertBorder(this);
             }
             checkFieldsUpdate(update_profil_user_form_login,update_profil_user_form_phone,update_profil_user_form_portrait,modification_form_submit);
         });
@@ -146,9 +144,8 @@ window.onload = () =>{
 
         modification_form_submit.addEventListener('click',function(e){
 
-            let compteur = 0; let nbBordure = 0;let champSuccess = []; let tableau = [];
-
-                if(update_profil_user_form_portrait.classList.contains('border-red-300') || update_profil_user_form_portrait.value==="")
+            let compteur = 0; let nbBordure = 0;
+            if(update_profil_user_form_portrait.classList.contains('border-red-300') || update_profil_user_form_portrait.value==="")
                 {
                     alertBorder(update_profil_user_form_portrait);
                     compteur++;

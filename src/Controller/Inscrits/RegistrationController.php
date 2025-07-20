@@ -12,6 +12,7 @@ use App\Service\JwtService;
 use App\Service\PhotoService;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityNotFoundException;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,11 +26,11 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class RegistrationController extends AbstractController
 {
 
-    protected const USERS = "users";
-    protected const WEBMASTER = 'webmaster@my-domain.org';
+    protected const string USERS = "users";
+    protected const string WEBMASTER = 'webmaster@my-domain.org';
 
     /**
-     * @throws \Exception
+     * @throws Exception
      * @throws ExceptionInterface
      */
     #[Route('/register', name: 'app_register',methods: ['GET','POST'])]
@@ -104,7 +105,7 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      * @throws ExceptionInterface
      */
     #[Route('/profil/update/{id}', name: 'app_profil_update', methods: ['GET','POST'])]
