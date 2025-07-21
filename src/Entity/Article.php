@@ -28,13 +28,7 @@ class Article
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $introduction = null;
-
-    #[ORM\Column(type: Types::TEXT)]
-    private ?string $developpement = null;
-
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $conclusion = null;
+    private ?string $contenu = null;
 
     /**
      * @var Collection<int, Photo>
@@ -76,41 +70,19 @@ class Article
         return $this;
     }
 
-    public function getIntroduction(): ?string
+    public function getContenu(): ?string
     {
-        return $this->introduction;
+        return $this->contenu;
     }
 
-    public function setIntroduction(?string $introduction): static
+    public function setContenu(?string $contenu): static
     {
-        $this->introduction = $introduction;
+        $this->contenu = $contenu;
 
         return $this;
     }
 
-    public function getDeveloppement(): ?string
-    {
-        return $this->developpement;
-    }
 
-    public function setDeveloppement(string $developpement): static
-    {
-        $this->developpement = $developpement;
-
-        return $this;
-    }
-
-    public function getConclusion(): ?string
-    {
-        return $this->conclusion;
-    }
-
-    public function setConclusion(?string $conclusion): static
-    {
-        $this->conclusion = $conclusion;
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Photo>

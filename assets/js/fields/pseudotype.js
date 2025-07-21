@@ -1,5 +1,3 @@
-/** ^[a-zA-Z '-éàèêçïù]{10,30}$ */
-
 import { alertBorder, successBorder } from "./fieldtype.js";
 
 const controlPseudo = function (champ){

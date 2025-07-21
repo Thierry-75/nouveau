@@ -14,7 +14,6 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use EmilePerron\TinymceBundle\Form\Type\TinymceType;
 use Symfony\Component\Validator\Constraints\Count;
-use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Sequentially;
 
@@ -33,41 +32,16 @@ class ArticleFormType extends AbstractType
             ]
                     ]
             )
-            ->add('introduction',TinymceType::class, [
+            ->add('contenu',TinymceType::class, [
                     'attr' => [
                         'class' => 'input-gray text-lg px-3 py-3 mb-4',
                         'toolbar' => 'undo redo | bold italic | forecolor backcolor | template | alignleft aligncenter alignright alignjustify | bullist numlist | link | spellchecker',
                         'id' => 'article_form_introduction',
-                        'height' => 225
+                        'height' => 500
                     ],
-                    'label' => 'Introduction',
+                    'label' => 'Texte',
                     'label_attr' => ['class' => 'block text-lg font-medium text-cyan-800 mb-1 ml-2']]
             )
-            ->add('developpement',TinymceType::class, [
-                    'attr' => [
-                        'class' => 'input-gray text-lg mb-4',
-                        'toolbar' => 'undo redo | bold italic | forecolor backcolor | template | alignleft aligncenter alignright alignjustify | bullist numlist | link | spellchecker',
-                        'id' => 'article_form_developpement',
-                        'height' => 300
-                    ],
-                    'label' => 'Développement:',
-                    'label_attr' => ['class' => 'block text-lg font-medium text-cyan-800 mb-1 ml-2'],
-                      'constraints'=>[
-                      new NotBlank(message: 'Développement obligatoire ')
-                    ]
-                ]
-            )
-            ->add('conclusion',TinymceType::class, [
-                    'attr' => [
-                        'class' => 'input-gray text-lg px-3 py-3 mb-4',
-                        'toolbar' => 'undo redo | bold italic | forecolor backcolor | template | alignleft aligncenter alignright alignjustify | bullist numlist | link | spellchecker',
-                        'id' => 'article_form_conclusion',
-                        'height' => 225
-                    ],
-                    'label' => 'Conclusion',
-                    'label_attr' => ['class' => 'block text-lg font-medium text-cyan-800 mb-1 ml-2']
-
-                ])
             ->add('photos',FileType::class, options: [
                 'multiple'=>true,
                 'mapped'=>false,

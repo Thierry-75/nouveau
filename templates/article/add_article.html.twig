@@ -20,7 +20,7 @@
                 <div class="mb-5">
                     <div class="text-md text-cyan-700 text-left">
                         {{ form_label(form_article_new.title) }}
-                        <div class="text-red-600 text-center" id="error_title">
+                        <div class="text-red-600 text-center text-lg" id="error_title">
                         {{ form_errors(form_article_new.title) }}
                         </div>
                     </div>
@@ -33,43 +33,19 @@
             <div>
                 <div class="mb-5">
                     <div class="text-md text-cyan-700 text-left" >
-                        {{ form_label(form_article_new.introduction) }}
-                        <div class="text-red-600 text-center" id="error_introduction">
-                            {{ form_errors(form_article_new.introduction) }}
+                        {{ form_label(form_article_new.contenu) }}
+                        <div class="text-red-600 text-center text-lg" id="error_introduction">
+                            {{ form_errors(form_article_new.contenu) }}
                         </div>
                     </div>
-                    {{ form_widget(form_article_new.introduction) }}
-                </div>
-
-            </div>
-            <div>
-                <div class="mb-5">
-                    <div class="text-md text-cyan-700 text-left">
-                        {{ form_label(form_article_new.developpement) }}
-                        <div class="text-red-600 text-center" id="error_developpement">
-                            {{ form_errors(form_article_new.developpement) }}
-                        </div>
-                    </div>
-                    {{ form_widget(form_article_new.developpement) }}
-                </div>
-
-            </div>
-            <div>
-                <div class="mb-5">
-                    <div class="text-md text-cyan-700 text-left">
-                        {{ form_label(form_article_new.conclusion) }}
-                        <div class="text-red-600 text-center" id="error_conclusion">
-                            {{ form_errors(form_article_new.conclusion) }}
-                        </div>
-                    </div>
-                    {{ form_widget(form_article_new.conclusion) }}
+                    {{ form_widget(form_article_new.contenu) }}
                 </div>
 
             </div>
             <div class="mb-5">
                 <div class="text-md text-cyan-700 text-left">
                     {{ form_label(form_article_new.photos) }}
-                    <div class="text-red-600 text-center" id="error_photos">
+                    <div class="text-red-600 text-center text-lg" id="error_photos">
                         <p class="text-center" id="error"></p>
                         {{ form_errors(form_article_new.photos) }}
                     </div>
