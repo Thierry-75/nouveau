@@ -42,7 +42,7 @@ class Photo
         return $this->name;
     }
 
-    public function setName(string $name): static
+    public function setName(string $name): self
     {
         $this->name = $name;
 
@@ -54,7 +54,7 @@ class Photo
         return $this->article;
     }
 
-    public function setArticle(?Article $article): static
+    public function setArticle(?Article $article): self
     {
         $this->article = $article;
 

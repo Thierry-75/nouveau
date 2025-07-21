@@ -21,10 +21,10 @@ class Article
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: false)]
     private ?\DateTimeImmutable $createdAt = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: false)]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
@@ -33,7 +33,7 @@ class Article
     /**
      * @var Collection<int, Photo>
      */
-    #[ORM\OneToMany(targetEntity: Photo::class, mappedBy: 'article', orphanRemoval: true,cascade: ['persist','remove'])]
+    #[ORM\OneToMany(targetEntity: Photo::class, mappedBy: 'article', cascade: ['persist','remove'], orphanRemoval: true)]
     private Collection $photos;
 
     public function __construct()
@@ -104,11 +104,9 @@ class Article
 
     public function removePhoto(Photo $photo): static
     {
-        if ($this->photos->removeElement($photo)) {
-            // set the owning side to null (unless already changed)
-            if ($photo->getArticle() === $this) {
-                $photo->setArticle(null);
-            }
+        // set the owning side to null (unless already changed)
+        if ($this->photos->removeElement($photo) && $photo->getArticle() === $this) {
+            $photo->setArticle(null);
         }
 
         return $this;

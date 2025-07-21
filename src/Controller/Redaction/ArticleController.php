@@ -21,18 +21,16 @@ final class ArticleController extends AbstractController
     protected const string USERS = "articles";
     protected const string WEBMASTER = 'webmaster@my-domain.org';
 
-    #[Route('/article/', name: 'app_article_index', methods:['POST','GET'])]
+    #[Route('/article/show/{id}', name: 'app_article_index', methods:['GET'])]
     public function index(Article $article): Response
     {
-        return $this->render('article/index.html.twig', [
-            'article'=>$article
-        ]);
+        return $this->render('article/index.html.twig',['article'=>$article]);
     }
 
     /**
      * @throws Exception
      */
-    #[Route('/article/add', name: 'app_article_add', methods:['POST','GET'])]
+    #[Route('/article/add/', name: 'app_article_add', methods:['POST','GET'])]
     public function addArticle(
         Request $request,EntityManagerInterface $manager,PhotoService $photoService,SluggerInterface $slugger
     ): Response
@@ -41,13 +39,14 @@ final class ArticleController extends AbstractController
         $form = $this->createForm(ArticleFormType::class,$article);
         $form->handleRequest($request);
         if($request->isMethod('POST') && $form->isSubmitted() && $form->isValid()) {
-            $article->setSlug($slugger->slug(strtolower($form->get('title')->getData())));
+
             $photos = $form->get('photos')->getData();
             $count = 1;
             foreach ($photos as $photo){
                 if($photo->getClientOriginalExtension()==='jpeg' || $photo->getClientOriginalExtension()==='jpg')
                 {
                     try{
+                        $article->setSlug($slugger->slug(strtolower($form->get('title')->getData())));
                         $fichier = $photoService->add($photo,$article->getSlug().'-'.$count,self::USERS,1024,768);
                         $image = new Photo();
                         $image->setName($fichier);
@@ -64,7 +63,7 @@ final class ArticleController extends AbstractController
                 $manager->persist($article);
                 $manager->flush();
                 $this->addFlash('alert-success', 'Article créé !');
-                return $this->redirectToRoute('app_article_index');
+                return $this->redirectToRoute('app_article_index',['article'=>$article->getId()]);
             }catch (EntityNotFoundException $e)
             {
                 return $this->redirectToRoute('app_error',['exception'=>$e]);

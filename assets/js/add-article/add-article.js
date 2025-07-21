@@ -26,7 +26,6 @@ window.onload = () => {
 
 
         article_form_title.addEventListener('focus',function(){
-            clearField(this);
             let message ='';
             info(error_title,message);
         })
