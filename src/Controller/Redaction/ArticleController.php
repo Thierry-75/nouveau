@@ -5,6 +5,7 @@ namespace App\Controller\Redaction;
 use App\Entity\Article;
 use App\Entity\Photo;
 use App\Form\ArticleFormType;
+use App\Repository\ArticleRepository;
 use App\Service\PhotoService;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityNotFoundException;
@@ -16,21 +17,28 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
+#[Route(path:'/article', name: 'app_article_')]
 final class ArticleController extends AbstractController
 {
     protected const string USERS = "articles";
     protected const string WEBMASTER = 'webmaster@my-domain.org';
 
-    #[Route('/article/show/{id}', name: 'app_article_index', methods:['GET'])]
-    public function index(Article $article): Response
+    #[Route('/show/{slug}', name: 'index', methods:['GET'])]
+    public function index($slug , ArticleRepository $articleRepository): Response
     {
+        try {
+            $article = $articleRepository->findOneBy(['slug' => $slug]);
+        }catch(EntityNotFoundException $e)
+        {
+            return $this->redirectToRoute('app_error',['exception'=>$e]);
+        }
         return $this->render('article/index.html.twig',['article'=>$article]);
     }
 
     /**
      * @throws Exception
      */
-    #[Route('/article/add/', name: 'app_article_add', methods:['POST','GET'])]
+    #[Route('/add', name: 'add', methods:['POST','GET'])]
     public function addArticle(
         Request $request,EntityManagerInterface $manager,PhotoService $photoService,SluggerInterface $slugger
     ): Response
@@ -63,7 +71,7 @@ final class ArticleController extends AbstractController
                 $manager->persist($article);
                 $manager->flush();
                 $this->addFlash('alert-success', 'Article créé !');
-                return $this->redirectToRoute('app_article_index',['article'=>$article->getId()]);
+                return $this->redirectToRoute('app_article_index',['slug'=>$article->getSlug()]);
             }catch (EntityNotFoundException $e)
             {
                 return $this->redirectToRoute('app_error',['exception'=>$e]);
