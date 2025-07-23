@@ -14,16 +14,16 @@
             <div class="lg:col-span-2">
                 <div class="py-8 lg:pe-8">
                     <div class="space-y-5 lg:space-y-8">
-                        <a class="inline-flex items-center gap-x-1.5 text-sm text-gray-600 decoration-2 hover:underline focus:outline-hidden focus:underline dark:text-blue-500" href="#">
+                        <a class="inline-flex items-center gap-x-1.5 text-sm text-gray-600 decoration-2 hover:underline focus:outline-hidden focus:underline dark:text-blue-500" href="{{ path('app_main') }}">
                             <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="m15 18-6-6 6-6"></path>
                             </svg>
-                            Back to Blog
+                            Retour à l'accueil
                         </a>
                         <h2 class="text-3xl text-left text-cyan-800 font-bold lg:text-4xl dark:text-white">{{ article.title }}</h2>
                         <div class="flex items-center gap-x-5">
                             <p class="inline-flex items-center gap-1.5 py-1 px-3 sm:py-2 sm:px-4 rounded-full text-xs sm:text-sm bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800">
-                                Blog de Thierry
+                                Article paru le
                             </p>
                             <p class="text-xs sm:text-sm text-right text-cyan-900 dark:text-neutral-200">{{ article.createdAt | date('l, j F Y à H:i') }}</p>
                         </div>
@@ -52,9 +52,9 @@
                         </figure>
 
                         <div class="space-y-3">
-                            <div class="group flex items-center gap-x-3 border-b border-gray-200 pb-8 mb-8 dark:border-neutral-700">
+                            <div class="group flex items-center gap-x-3 border-b border-cyan-600 pb-8 mb-8 dark:border-cyan-700">
                                 <a class="block shrink-0 focus:outline-hidden" href="#">
-                                    <img class="size-1/3 rounded-full" src="https://images.unsplash.com/photo-1669837401587-f9a4cfe3126e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80" alt="Avatar">
+                                    <img class="size-1/3 rounded-full border border-cyan-700" src="https://images.unsplash.com/photo-1669837401587-f9a4cfe3126e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80" alt="Avatar">
                                 </a>
 
                                 <a class="group grow block focus:outline-hidden" href="">
@@ -67,13 +67,9 @@
                                 </a>
 
                                 <div class="grow">
-                                    <div class="flex justify-end">
-                                        <button type="button" class="py-1.5 px-2.5 inline-flex items-center gap-x-2 text-xs font-medium rounded-lg border border-transparent bg-cyan-700 text-white hover:bg-cyan-800" linecap="round" stroke-linejoin="round">
-                                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
-                                        <circle cx="9" cy="7" r="4"></circle>
-                                        <line x1="19" x2="19" y1="8" y2="14"></line>
-                                        <line x1="22" x2="16" y1="11" y2="11"></line>
-                                            Follow
+                                    <div class="flex justify-end ">
+                                        <button type="button" class="py-1.5 px-2.5 inline-flex items-center gap-x-2 text-md text-center font-medium rounded-lg border border-transparent bg-cyan-700 text-white hover:bg-cyan-800" linecap="round" stroke-linejoin="round">
+                                            Suivez moi
                                         </button>
                                     </div>
                                 </div>
@@ -86,16 +82,16 @@
                         <div class="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-y-5 lg:gap-y-0">
                             <!-- Badges/Tags -->
                             <div>
-                                <a class="m-0.5 inline-flex items-center gap-1.5 py-2 px-3 rounded-lg text-sm bg-cyan-700 text-white hover:bg-cyan-900 focus:outline-hidden focus:bg-gray-200 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" href="#">
+                                <a class="m-0.5 inline-flex items-center gap-1.5 py-2 px-3 rounded-lg text-sm bg-neutral-300 text-neutral-900 hover:bg-amber-300 focus:outline-hidden focus:bg-gray-200 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" href="#">
                                     Plan
                                 </a>
-                                <a class="m-0.5 inline-flex items-center gap-1.5 py-2 px-3 rounded-lg text-sm bg-cyan-700 text-white hover:bg-cyan-900 focus:outline-hidden focus:bg-gray-200 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" href="#">
+                                <a class="m-0.5 inline-flex items-center gap-1.5 py-2 px-3 rounded-lg text-sm bg-neutral-300 text-neutral-900 hover:bg-amber-300 focus:outline-hidden focus:bg-gray-200 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" href="#">
                                     Web development
                                 </a>
-                                <a class="m-0.5 inline-flex items-center gap-1.5 py-2 px-3 rounded-lg text-sm bg-cyan-700 text-white hover:bg-cyan-900 focus:outline-hidden focus:bg-gray-200 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" href="#">
+                                <a class="m-0.5 inline-flex items-center gap-1.5 py-2 px-3 rounded-lg text-sm bg-neutral-300 text-neutral-900 hover:bg-amber-300 focus:outline-hidden focus:bg-gray-200 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" href="#">
                                     Free
                                 </a>
-                                <a class="m-0.5 inline-flex items-center gap-1.5 py-2 px-3 rounded-lg text-sm bg-cyan-700 text-white hover:bg-cyan-900 focus:outline-hidden focus:bg-gray-200 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" href="#">
+                                <a class="m-0.5 inline-flex items-center gap-1.5 py-2 px-3 rounded-lg text-sm bg-neutral-300 text-neutral-900 hover:bg-amber-300 focus:outline-hidden focus:bg-gray-200 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" href="#">
                                     Team
                                 </a>
                             </div>
@@ -104,7 +100,7 @@
                             <div class="flex justify-end items-center gap-x-1.5">
                                 <!-- Button -->
                                 <div class="hs-tooltip inline-block">
-                                    <button type="button" class="hs-tooltip-toggle flex items-center gap-x-2 text-sm text-neutral-800 hover:text-neutral-900 focus:outline-hidden focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200">
+                                    <button type="button" class="hs-tooltip-toggle flex items-center gap-x-2 text-sm text-orange-800 hover:text-orange-900 focus:outline-hidden focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
                                             <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z"></path>
                                         </svg>
@@ -120,7 +116,7 @@
 
                                 <!-- Button -->
                                 <div class="hs-tooltip inline-block">
-                                    <button type="button" class="hs-tooltip-toggle flex items-center gap-x-2 text-sm text-neutral-800 hover:text-neutral-900 focus:outline-hidden focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200">
+                                    <button type="button" class="hs-tooltip-toggle flex items-center gap-x-2 text-sm text-orange-800 hover:text-orange-900 focus:outline-hidden focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
                                             <path fill-rule="evenodd" d="M4.848 2.771A49.144 49.144 0 0 1 12 2.25c2.43 0 4.817.178 7.152.52 1.978.292 3.348 2.024 3.348 3.97v6.02c0 1.946-1.37 3.678-3.348 3.97-1.94.284-3.916.455-5.922.505a.39.39 0 0 0-.266.112L8.78 21.53A.75.75 0 0 1 7.5 21v-3.955a48.842 48.842 0 0 1-2.652-.316c-1.978-.29-3.348-2.024-3.348-3.97V6.741c0-1.946 1.37-3.68 3.348-3.97Z" clip-rule="evenodd"></path>
                                         </svg>
@@ -137,8 +133,8 @@
 
                                 <!-- Button -->
                                 <div class="hs-dropdown relative inline-flex">
-                                    <button id="hs-blog-article-share-dropdown" type="button" class="hs-dropdown-toggle flex items-center gap-x-2 text-sm text-neutral-800 hover:text-neutral-900 focus:outline-hidden focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+                                    <button id="hs-blog-article-share-dropdown" type="button" class="hs-dropdown-toggle flex items-center gap-x-2 text-sm text-orange-800 hover:text-orange-900 focus:outline-hidden focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 mb-2">
                                             <path d="M11.47 1.72a.75.75 0 0 1 1.06 0l3 3a.75.75 0 0 1-1.06 1.06l-1.72-1.72V7.5h-1.5V4.06L9.53 5.78a.75.75 0 0 1-1.06-1.06l3-3ZM11.25 7.5V15a.75.75 0 0 0 1.5 0V7.5h3.75a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-9a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3h3.75Z"></path>
                                         </svg>
                                         Share

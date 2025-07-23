@@ -42,8 +42,8 @@ class Article
     #[ORM\ManyToMany(targetEntity: Category::class, mappedBy: 'article')]
     private Collection $categories;
 
-    #[ORM\Column]
-    private ?bool $isPublished = null;
+    #[ORM\Column(nullable: false)]
+    private ?bool $isPublished = false;
 
     public function __construct()
     {

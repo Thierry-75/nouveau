@@ -4,21 +4,21 @@
 <div class="rounded overflow-hidden shadow-lg flex flex-col">
     <a href="#"></a>
     <div class="relative"><a href="#">
-            <img class="w-full"
+            <img class="h-56 w-full rounded-t-md shadow-md"
                  src="{{ asset('assets/uploads/articles/') ~ article.photos[0].name  }}"
                  alt="{{ article.photos[1].name }}">
             <div
                 class="hover:bg-transparent transition duration-300 absolute bottom-0 top-0 right-0 left-0 bg-gray-900 opacity-25">
             </div>
         </a>
-        <a href="#!">
-            <div class="text-sm rounded-md absolute top-0 right-0 bg-cyan-600 px-4 py-2 text-white mt-3 mr-3 hover:bg-cyan-700 hover:text-gray-50 transition duration-500 ease-in-out">
+        <a href="{{ path('app_article_index',{slug:article.slug}) }}">
+            <div class="text-sm rounded-md shadow-lg absolute top-0 right-0 bg-amber-400 px-4 py-2 text-neutral-900 mt-3 mr-3 hover:bg-amber-500 hover:text-neutral-900 transition duration-500 ease-in-out">
                 Voir
             </div>
         </a>
     </div>
     <div class="px-6 py-4 mb-auto">
-        <a href="#"
+        <a href="{{ path('app_article_index',{slug:article.slug}) }}"
            class="font-medium text-lg text-cyan-600 hover:text-cyan-800 transition duration-500 ease-in-out inline-block mb-2">{{ article.title }}</a>
         <p class="text-gray-500 text-sm">
             {{ article.contenu | u.truncate(200,'...'|raw) }}
