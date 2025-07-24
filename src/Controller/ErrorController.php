@@ -12,8 +12,7 @@ class ErrorController extends AbstractController
     #[Route('/error/{e}', name: 'app_error')]
     public function index(Exception $e): Response
     {
-
         return $this->render('bundles/TwigBundle/Exception/error'.$e->getCode(). '.html.twig',
-            ['status_code'=>$e->getCode(),'status_text'=>$e->getMessage()]);
+            ['exception'=>$e]);
     }
 }

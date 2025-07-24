@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+        {% block importmap %}{% endblock %}
+    {% endblock %}
+
+    <title>Oops ! {{ exception.statusCode }}</title>
+</head>
+<body class="bg-neutral-100">
+{% block body %}
+
+    {% if exception.statusCode =='401' %}
+        <div class="max-w-screen-xl mx-auto p-5 sm:p-8 md:p-12">
+            <div class="max-w-md mx-auto text-center bg-white bg-opacity-90 p-8 rounded-md shadow-md">
+                <div class="text-9xl font-bold text-cyan-600 mb-4">{{  exception.statusCode }}</div>
+                <h1 class="text-3xl font-bold text-orange-900 mb-6">Oops! Accès controlé</h1>
+                <p class="text-md text-cyan-800 mb-2">La page ne semble pas vous reconnaitre !</p>
+                <p class="text-md text-orange-900 mb-2">Pour toute réclamation, adressez-vous à l'accueil</p>
+                <p class="text-md text-cyan-800 mb-2">Message:
+                    {{ exception.statusText }}</p>
+                <p class="text-sm text-cyan-800 mb-10">Exception:
+                    {{ exception.message }}</p>
+                <p class="text-sm text-cyan-800 mb-10">
+                    <a href="{{ path('app_main')}}" class="btn-retour">
+                        Retour à l'accueil
+                    </a>
+            </div>
+        </div>
+    {% elseif exception.statusCode =='403' %}
+        <div class="max-w-screen-xl mx-auto p-5 sm:p-8 md:p-12">
+            <div class="max-w-md mx-auto text-center bg-white bg-opacity-90 p-8 rounded-md shadow-md">
+                <div class="text-9xl font-bold text-cyan-600 mb-4">{{  exception.statusCode }}</div>
+                <h1 class="text-3xl font-bold text-orange-900 mb-6">Oops! Accès interdit</h1>
+                <p class="text-md text-cyan-800 mb-2">La page refuse de vous rencontrer !</p>
+                <p class="text-md text-orange-900 mb-2">Pour toute réclamation, adressez-vous à l'accueil</p>
+                <p class="text-md text-cyan-800 mb-2">Message:
+                    {{ exception.statusText }}</p>
+                <p class="text-sm text-cyan-800 mb-10">Exception:
+                    {{ exception.message }}</p>
+                <p class="text-sm text-cyan-800 mb-10">
+                    <a href="{{ path('app_main')}}" class="btn-retour">
+                        Retour à l'accueil
+                    </a>
+            </div>
+        </div>
+    {% elseif exception.statusCode =='404' %}
+        <div class="max-w-screen-xl mx-auto p-5 sm:p-8 md:p-12">
+            <div class="max-w-md mx-auto text-center bg-white bg-opacity-90 p-8 rounded-md shadow-md">
+                <div class="text-9xl font-bold text-cyan-600 mb-4">{{  exception.statusCode }}</div>
+                <h1 class="text-3xl font-bold text-orange-900 mb-6">Oops! Page introuvable</h1>
+                <p class="text-md text-cyan-800 mb-2">La page s'est barrée sans prévenir !</p>
+                <p class="text-md text-orange-900 mb-2">Pour toute réclamation, adressez-vous à l'accueil</p>
+                <p class="text-md text-cyan-800 mb-2">Message:
+                    {{ exception.statusText }}</p>
+                <p class="text-sm text-cyan-800 mb-10">Exception:
+                    {{ exception.message }}</p>
+                <p class="text-sm text-cyan-800 mb-10"></p>
+                <a href="{{ path('app_main')}}" class="btn-retour">
+                    Retour à l'accueil
+                </a>
+            </div>
+        </div>
+    {% elseif exception.statusCode =='500' %}
+        <div class="max-w-screen-xl mx-auto p-5 sm:p-8 md:p-12">
+            <div class="max-w-md mx-auto text-center bg-white bg-opacity-90 p-8 rounded-md shadow-md">
+                <div class="text-9xl font-bold text-cyan-600 mb-4">{{  exception.statusCode }}</div>
+                <h1 class="text-3xl font-bold text-orange-900 mb-6">Oops! Serveur en vacance</h1>
+                <p class="text-md text-cyan-800 mb-2">Recherche désespérément le serveur !</p>
+                <p class="text-md text-orange-900 mb-2">Désolé peut être un peu plus tard ...</p>
+                <p class="text-md text-cyan-800 mb-2">Message:
+                    {{ exception.statusText }}</p>
+                <p class="text-sm text-cyan-800 mb-10">Exception:
+                    {{ exception.message }}</p>
+                <a href="{{ path('app_main')}}" class="btn-retour">
+                    Retour à l'accueil
+                </a>
+            </div>
+        </div>
+    {% elseif exception.statusCode =='502' %}
+        <div class="max-w-screen-xl mx-auto p-5 sm:p-8 md:p-12">
+            <div class="max-w-md mx-auto text-center bg-white bg-opacity-90 p-8 rounded-md shadow-md">
+                <div class="text-9xl font-bold text-cyan-600 mb-4">{{  exception.statusCode }}</div>
+                <h1 class="text-3xl font-bold text-orange-900 mb-6">Oops! Serveur en vacance</h1>
+                <p class="text-md text-cyan-800 mb-2">Recherche désespérément le serveur !</p>
+                <p class="text-md text-orange-900 mb-2">Désolé peut être un peu plus tard ...</p>
+                <p class="text-md text-cyan-800 mb-2">Message:
+                    {{ exception.statusText }}</p>
+                <p class="text-sm text-cyan-800 mb-10">Exception:
+                    {{ exception.message }}</p>
+                <a href="{{ path('app_main')}}" class="btn-retour">
+                    Retour à l'accueil
+                </a>
+            </div>
+        </div>
+    {% elseif exception.statusCode =='503' %}
+        <div class="max-w-screen-xl mx-auto p-5 sm:p-8 md:p-12">
+            <div class="max-w-md mx-auto text-center bg-white bg-opacity-90 p-8 rounded-md shadow-md">
+                <div class="text-9xl font-bold text-cyan-600 mb-4">{{  exception.statusCode }}</div>
+                <h1 class="text-3xl font-bold text-orange-900 mb-6">Oops! Serveur en vacance</h1>
+                <p class="text-md text-cyan-800 mb-2">Recherche désespérément le serveur !</p>
+                <p class="text-md text-orange-900 mb-2">Désolé peut être un peu plus tard ...</p>
+                <p class="text-md text-cyan-800 mb-2">Message:
+                    {{ exception.statusText }}</p>
+                <p class="text-sm text-cyan-800 mb-10">Exception:
+                    {{ exception.message }}</p>
+                <a href="{{ path('app_main')}}" class="btn-retour">
+                    Retour à l'accueil
+                </a>
+            </div>
+        </div>
+    {% elseif exception.statusCode =='504' %}
+        <div class="max-w-screen-xl mx-auto p-5 sm:p-8 md:p-12">
+            <div class="max-w-md mx-auto text-center bg-white bg-opacity-90 p-8 rounded-md shadow-md">
+                <div class="text-9xl font-bold text-cyan-600 mb-4">{{  exception.statusCode }}</div>
+                <h1 class="text-3xl font-bold text-orange-900 mb-6">Oops! Serveur en vacance</h1>
+                <p class="text-md text-cyan-800 mb-2">Recherche désespérément le serveur !</p>
+                <p class="text-md text-orange-900 mb-2">Désolé peut être un peu plus tard ...</p>
+                <p class="text-md text-cyan-800 mb-2">Message:
+                    {{ exception.statusText }}</p>
+                <p class="text-sm text-cyan-800 mb-10">Exception:
+                    {{ exception.message }}</p>
+                <a href="{{ path('app_main')}}" class="btn-retour">
+                    Retour à l'accueil
+                </a>
+            </div>
+        </div>
+    {% elseif exception.statusCode =="" or exception.statusCode !='401' or exception.statusCode !='403' or exception.statusCode !='404' or exception.statusCode !='500' %}
+        <div class="max-w-screen-xl mx-auto p-5 sm:p-8 md:p-12">
+            <div class="max-w-md mx-auto text-center bg-white bg-opacity-90 p-8 rounded-md shadow-md">
+                <div class="text-3xl font-bold text-cyan-600 mb-4">{{  exception.statusCode }}</div>
+                <h1 class="text-2xl font-bold text-orange-900 mb-6">Oops! Crash</h1>
+                <p class="text-md text-cyan-800 mb-2">Y a un truc qu'il n'a pas apprécié...</p>
+                <p class="text-md text-orange-900 mb-2">Désolé il est un peu susceptible ...</p>
+                <p class="text-md text-cyan-800 mb-2">Message:
+                    {{ exception.statusText }}</p>
+                <p class="text-sm text-cyan-800 mb-10">Exception:
+                    {{ exception.message }}</p>
+                <a href="{{ path('app_main')}}" class="btn-retour">
+                    Retour à l'accueil
+                </a>
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock %}
+</body>
+</html>

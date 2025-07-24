@@ -40,13 +40,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Regex(
         pattern: '/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{10}$/'
     )]
-    private $plainPassword;
+    private ?string $plainPassword;
 
     /**
      * @var string The hashed password
      */
     #[ORM\Column]
-    private ?string $password = null;
+    private string $password = '';
 
     #[ORM\Column(length: 30)]
     #[Assert\Regex(
@@ -242,5 +242,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->updatedAt = $updatedAt;
 
         return $this;
+    }
+
+    public function __toString():string
+    {
+        return $this->email;
     }
 }

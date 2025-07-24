@@ -2,14 +2,17 @@
 
 namespace App\Entity;
 
+use App\Entity\Trait\SluggerTrait;
 use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 class Category
 {
+    use SluggerTrait;
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -18,19 +21,20 @@ class Category
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 50,unique: true)]
+    #[Assert\Unique]
     private ?string $name = null;
+
+    public function __construct()
+    {
+        $this->article = new ArrayCollection();
+    }
 
     /**
      * @var Collection<int, Article>
      */
     #[ORM\ManyToMany(targetEntity: Article::class, inversedBy: 'categories')]
     private Collection $article;
-
-    public function __construct()
-    {
-        $this->article = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -45,7 +49,6 @@ class Category
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
-
         return $this;
     }
 
@@ -57,7 +60,6 @@ class Category
     public function setName(string $name): static
     {
         $this->name = $name;
-
         return $this;
     }
 
@@ -81,7 +83,11 @@ class Category
     public function removeArticle(Article $article): static
     {
         $this->article->removeElement($article);
-
         return $this;
+    }
+
+    public function __toString():string
+    {
+        return $this->name;
     }
 }

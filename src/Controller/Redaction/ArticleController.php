@@ -13,7 +13,6 @@ use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
@@ -47,7 +46,6 @@ final class ArticleController extends AbstractController
         $form = $this->createForm(ArticleFormType::class,$article);
         $form->handleRequest($request);
         if($request->isMethod('POST') && $form->isSubmitted() && $form->isValid()) {
-
             $photos = $form->get('photos')->getData();
             $count = 1;
             foreach ($photos as $photo){
@@ -60,7 +58,7 @@ final class ArticleController extends AbstractController
                         $image->setName($fichier);
                         $article->addPhoto($image);
                         $count++;
-                    }catch (HttpException $e)
+                    }catch (Exception $e)
                     {
                         return $this->redirectToRoute('app_error',['exception'=>$e]);
                     }

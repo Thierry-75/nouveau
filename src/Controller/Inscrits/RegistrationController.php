@@ -53,21 +53,31 @@ class RegistrationController extends AbstractController
                         $email = $form->get('email')->getData();
                         $image = $form->get('portrait')->getData();
                         try{
-                            if($image->getClientOriginalExtension() === 'jpeg'  || $image->getClientOriginalExtension() === 'jpg'){
-                            $portrait = $photoService->add($image,$email, self::USERS,256,256);
-                            $user->setPortrait($portrait);
-                            $entityManager->persist($user);
-                            $entityManager->flush();
-                            $subject="Activation de votre compte";
-                            $destination ='check_user';
-                            $nomTemplate ='register';
-                            $intraController->emailValidate($user,$jwtService,$messageBusInterface,$destination,$subject,$nomTemplate);
-                            $this->addFlash('alert-warning','SVP, confirmez votre adresse email');
-                            return $this->redirectToRoute('app_main');
-                            }
-                        }catch(EntityNotFoundException $e){
+                                if($image->getClientOriginalExtension() === 'jpeg'  || $image->getClientOriginalExtension() === 'jpg')
+                                    {
+                                        $portrait = $photoService->add($image, $email, self::USERS, 256, 256);
+                                    }
+                        }catch (Exception $e){
                             return $this->redirectToRoute('app_error',['exception'=>$e]);
                         }
+                            $user->setPortrait($portrait);
+                        try {
+                            $entityManager->persist($user);
+                            $entityManager->flush();
+                        }catch (EntityNotFoundException $e) {
+                            return $this->redirectToRoute('app_error', ['exception'=>$e]);
+                        }
+                        try {
+                            $subject = "Activation de votre compte";
+                            $destination = 'check_user';
+                            $nomTemplate = 'register';
+                            $intraController->emailValidate($user, $jwtService, $messageBusInterface, $destination, $subject, $nomTemplate);
+                            $this->addFlash('alert-warning', 'SVP, confirmez votre adresse email');
+                            return $this->redirectToRoute('app_main');
+                        }catch(Exception $e){
+                            return $this->redirectToRoute('app_error',['exception'=>$e]);
+                            }
+
         }
         return $this->render('registration/register.html.twig',['registrationForm'=>$form->createView()]);
     }
@@ -79,10 +89,10 @@ class RegistrationController extends AbstractController
         if($jwtService->isValid($token) && !$jwtService->isExpired($token) && $jwtService->check($token, $this->getParameter('app.jwtsecret'))){
             $payload = $jwtService->getPayload($token);
             //user token
+            try{
             $user = $userRepository->find($payload['user_id']);
                 $user->setIsVerified(true);
                 $user->setIsNewsLetter(true);
-                try{
                     $entityManager->persist($user);
                     $entityManager->flush();
                     $this->addFlash('alert-success','Compte activé');
@@ -132,34 +142,34 @@ class RegistrationController extends AbstractController
                 ->setRoles($user->getRoles())
                 ->setIsVerified($user->IsVerified())
                 ->setIsNewsLetter($user->IsNewsLetter());
-                if($form->get('login')->getData()!==null){
-                    $user->setLogin($form->get('login')->getData());
-                }else{
-                    $user->setLogin($user->getLogin());
-
-                }
-                if($form->get('phone')->getData()!==null){
-                    $user->setPhone($form->get('phone')->getData());
-                }else{
-                    $user->setPhone($user->getPhone());
-                }
+                $user->setLogin($form->get('login')->getData() !==null ? $form->get('login')->getData():$user->getLogin());
+                $user->setPhone($form->get('phone')->getData()!==null ? $form->get('phone')->getData():$user->getPhone());
             try{
                 if($form->get('portrait')->getData() !== null){
                     $image = $form->get('portrait')->getData();
-                    if($image->getClientOriginalExtension() === 'jpeg' || $image->getClientOriginalExtension() === 'jpg'){
+                    if($image->getClientOriginalExtension() === 'jpeg' || $image->getClientOriginalExtension() === 'jpg') {
                         $portrait = $photoService->add($image, $user->getEmail(), self::USERS, 512, 768);
                         $user->setPortrait($portrait);
-                        $entityManager->persist($user);
-                        $entityManager->flush();
+                    }
+                }
+            }catch (Exception $e) {
+                return $this->redirectToRoute('app_main', ['exception' => $e]);
+            }
+            try {
+                $entityManager->persist($user);
+                $entityManager->flush();
+            }catch(EntityNotFoundException $e) {
+                return $this->redirectToRoute('app_error', ['exception' => $e]);
+            }
+            try{
                         $url = $this->generateUrl('app_login',[], UrlGeneratorInterface::ABSOLUTE_URL);
                         $messageBus->dispatch(new SendPasswordConfirm(self::WEBMASTER,$user->getEmail(),'Mise à jour profil','modification',['user'=>$user,'url'=>$url]));
                         $this->addFlash('alert-success','Profil mis à jour');
                         return $this->redirectToRoute('app_main');
-                    }
-                }
-            }catch (EntityNotFoundException $e){
+               }catch(\Exception $e){
                 return $this->redirectToRoute('app_error',['exception'=>$e]);
-            }
+                }
+
         }
         return $this->render('registration/update_profil.html.twig', [
             'updateProfilForm' => $form->createView(),
