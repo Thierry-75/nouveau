@@ -3,7 +3,7 @@
 <!-- CARD 1 -->
 <div class="rounded overflow-hidden shadow-lg flex flex-col">
     <a href="#"></a>
-    <div class="relative"><a href="#">
+    <div class="relative"><a href="{{ path('app_article_index',{slug:article.slug}) }}">
             <img class="h-56 w-full rounded-t-md shadow-md"
                  src="{{ asset('assets/uploads/articles/') ~ article.photos[0].name  }}"
                  alt="{{ article.photos[1].name }}">
