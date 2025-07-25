@@ -19,8 +19,8 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 #[Route(path:'/article', name: 'app_article_')]
 final class ArticleController extends AbstractController
 {
-    protected const string USERS = "articles";
-    protected const string WEBMASTER = 'webmaster@my-domain.org';
+    protected const  USERS = "articles";
+    protected const  WEBMASTER = 'webmaster@my-domain.org';
 
     #[Route('/show/{slug}', name: 'index', methods:['GET'])]
     public function index($slug , ArticleRepository $articleRepository): Response

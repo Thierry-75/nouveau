@@ -64,10 +64,18 @@
           @apply my-5 shadow-sm rounded-md bg-neutral-50 text-sm p-4 md:p-2 block mt-1 w-full;
         }
 
+    .input-gray-half {
+        @apply my-5 shadow-sm rounded-md bg-neutral-50 text-sm p-4 md:p-2 block mt-1 w-1/2;
+    }
+
   }
 
+label{
+    margin-left: 6px;
+    margin-right: 6px;
+}
 
-  #allowEmail{
+#allowEmail{
   display: none;
 }
 
