@@ -21,11 +21,20 @@
     </div>
     <div class="px-6 py-4 mb-auto">
         <a href="{{ path('app_article_index',{slug:article.slug}) }}"
-           class="font-medium text-lg text-cyan-600 hover:text-cyan-800 transition duration-500 ease-in-out inline-block mb-2">{{ article.title }}</a>
+           class="font-medium text-lg text-cyan-700 hover:text-cyan-800 transition duration-500 ease-in-out inline-block mb-2">{{ article.title }}</a>
         <p class="text-gray-500 text-sm">
             {{ article.contenu | u.truncate(200,'...'|raw) }}
         </p>
+        <ul class="flex flex-row justify-start text-xs mt-2">
+        {% for tag in article.tags %}
+                <li><span class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-lg text-xs font-medium bg-neutral-200 text-black dark:bg-blue-800/30 dark:text-blue-500">{{ tag.name }}</span></li>
+            {% if not loop.last %}
+                <span>&nbsp;</span>
+            {% endif %}
+        {% endfor %}
+        </ul>
     </div>
+
     <div class="px-6 py-3 flex flex-row items-center justify-between bg-gray-100">
                 <span href="#" class="py-1 text-xs font-regular text-gray-900 mr-1 flex flex-row items-center">
                     <svg height="13px" width="13px" version="1.1" id="Layer_1"

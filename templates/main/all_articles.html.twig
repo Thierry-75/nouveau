@@ -8,9 +8,10 @@
 
 {% block body %}
 
-<div class="max-w-7xl w-full mx-auto px-4">
-    <div class="max-w-screen-xl mx-auto p-5 sm:p-10 md:p-16">
-        <div class="border-b mb-5 mt-5 flex justify-between text-sm">
+<div class="w-full mx-auto px-4">
+
+    <div class="max-w-screen-2xl mx-auto p-5 sm:p-10 md:p-16">
+        <div class="border-b mb- mt-5 flex justify-between text-sm">
             <div class="text-cyan-700 flex items-center pb-2 pr-2 border-b-2 border-cyan-700 uppercase w-full">
                 <svg class="h-6 mr-3" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                      xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 455.005 455.005"
@@ -26,13 +27,13 @@
                 </g>
             </svg>
                 <p class="font-semibold text-xs "> {{ articles.getTotalItemCount }}<span> Articles</span></p>
-                {% include '_components/_search_data.html.twig' %}
             </div>
         </div>
-
+        {% include '_components/_search_data.html.twig' %}
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-10">
 
-            {% include '_components/_card.html.twig' with {articles:articles} %}
+
+            {% include '_components/_card.html.twig' %}
 
 
         </div>

@@ -27,7 +27,7 @@
                                 {{ article.createdAt | date('l, j F Y à H:i') }}
                             </p>
                             <a class="m-0.5 inline-flex items-center gap-1.5 py-2 px-3 rounded-lg text-sm bg-amber-400 text-black hover:bg-amber-500 focus:outline-hidden focus:bg-gray-200 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" href="#">
-                                &nbsp; {% for categorie in article.categories %}{{ categorie }}{% endfor %}
+                                &nbsp; {{ article.category }}
                             </a>
                         </div>
 
@@ -76,18 +76,14 @@
                         <div class="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-y-5 lg:gap-y-0">
                             <!-- Badges/Tags -->
                             <div>
-                                <a class="m-0.5 inline-flex items-center gap-1.5 py-2 px-3 rounded-lg text-sm bg-neutral-300 text-neutral-900 hover:bg-amber-300 focus:outline-hidden focus:bg-gray-200 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" href="#">
-                                    Plan
-                                </a>
-                                <a class="m-0.5 inline-flex items-center gap-1.5 py-2 px-3 rounded-lg text-sm bg-neutral-300 text-neutral-900 hover:bg-amber-300 focus:outline-hidden focus:bg-gray-200 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" href="#">
-                                    Web development
-                                </a>
-                                <a class="m-0.5 inline-flex items-center gap-1.5 py-2 px-3 rounded-lg text-sm bg-neutral-300 text-neutral-900 hover:bg-amber-300 focus:outline-hidden focus:bg-gray-200 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" href="#">
-                                    Free
-                                </a>
-                                <a class="m-0.5 inline-flex items-center gap-1.5 py-2 px-3 rounded-lg text-sm bg-neutral-300 text-neutral-900 hover:bg-amber-300 focus:outline-hidden focus:bg-gray-200 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" href="#">
-                                    Team
-                                </a>
+
+                                {% if article.tags %}
+                                {% for tag in article.tags %}
+                                    <a class="m-0.5 inline-flex items-center gap-1.5 py-2 px-3 rounded-lg text-sm bg-neutral-300 text-neutral-900 hover:bg-amber-300 focus:outline-hidden focus:bg-gray-200 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" href="#">
+                                        {{ tag.name }}
+                                    </a>
+                                 {% endfor%}
+                                {% endif %}
                             </div>
                             <!-- End Badges/Tags -->
 

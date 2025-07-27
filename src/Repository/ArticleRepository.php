@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Article;
 use App\Entity\Category;
+use App\Entity\Tag;
 use App\Model\SearchData;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -42,7 +43,7 @@ class ArticleRepository extends ServiceEntityRepository
      * @param Category|null $category
      * @return PaginationInterface
      */
-    public function findPublished(int $page, ?Category $category =null): PaginationInterface
+    public function findPublished(int $page, ?Category $category =null, ?Tag $tags =null): PaginationInterface
     {
         $data = $this->createQueryBuilder('a')
             ->where('a.isPublished LIKE :state')
@@ -55,6 +56,12 @@ class ArticleRepository extends ServiceEntityRepository
                     ->andWhere(':category IN (c)')
                     ->setParameter('category',$category);
             }
+            if(isset($tags)){
+            $data = $data
+                ->join('a.tags','t')
+                ->andWhere(':tags IN (t)')
+                ->setParameter('tags',$tags);
+        }
             $data->getQuery()
                  ->getResult();
 

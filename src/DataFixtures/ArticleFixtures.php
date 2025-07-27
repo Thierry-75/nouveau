@@ -22,7 +22,7 @@ class ArticleFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
 
-        $tableau_categories = ['Economie','Informatique','Philosophie','Politique','Histoire','Science'];
+        $tableau_categories = ['Philosophie','Science','Politique','Santé','Archéologie','Astronomie'];
         foreach ($tableau_categories as $categorie )
         {
             $category = new Category();
@@ -37,7 +37,7 @@ class ArticleFixtures extends Fixture
         $faker = Factory::create('fr_FR');
         $random_photos = ['default1.jpeg','default2.jpeg','default3.jpeg','default4.jpeg',
             'default5.jpeg','default6.jpeg','default7.jpeg','default8.jpeg','default9.jpeg','default10.jpeg'];
-        for($i = 0; $i < 50; $i++)
+        for($i = 0; $i < 150; $i++)
         {
             $article = new Article();
             $article->setCreatedAt(new \DateTimeImmutable())

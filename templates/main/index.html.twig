@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block body %}
-<div class="max-w-7xl w-full mx-auto px-4">
+<div class="max-w-screen-xl w-full mx-auto px-4">
     <div class="border-b mb-5 mt-5 flex justify-between text-sm">
         <div class="text-cyan-700 font-bold flex items-center pb-2 pr-2 border-b-2 border-cyan-700 uppercase">
             <svg class="h-6 mr-3" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
@@ -38,7 +38,7 @@
         </button>
         <!-- Carousel Container -->
         <div id="carousel" class="overflow-hidden relative">
-            <div id="testimonial-track" class="flex transition-transform duration-500 ease-in-out">
+        <div id="testimonial-track" class="flex transition-transform duration-500 ease-in-out">
         {% include '_components/_caroussel.html.twig' with { articles : articles_caroussel } %}
             </div>
         </div>
@@ -56,7 +56,7 @@
     </div>
 </div>
 
-    <div class="max-w-screen-xl mx-auto p-5 sm:p-10 md:p-16">
+    <div class="max-w-screen-2xl mx-auto p-5 sm:p-10 md:p-16">
 
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-10">
 

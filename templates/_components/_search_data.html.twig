@@ -1,21 +1,59 @@
+
+
+
+
 {% if form %}
-    {{ form_start(form) }}
-    <div class="flex flex-wrap mx-3 mb-2 w-full">
-        <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
-            {{ form_widget(form.q, {'attr': {'class': 'form-control relative flex-auto min-w-0 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-cyan-600 focus:outline-none'}}) }}
-            {{ form_errors(form.q) }}
-        </div>
-        <div class="w-full text-xs text-cyan-700 md:w-8/12 px-2 mb-6 md:mb-0">
-            {{ form_widget(form.categories,{'attr':{'class':'mt-4'}}) }}
-        </div>
-        <div class="w-full md:w-1/12 px-3 py-0 mb-8 md:mb-0">
-            <button class="btn inline-block px-6 py-2.5 bg-cyan-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-cyan-700 hover:shadow-lg focus:bg-blue-700  focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out flex items-center" type="submit" id="button-addon2">
-                <span>Filtre&nbsp</span>
-                <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="w-4" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512">
-                    <path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path>
-                </svg>
-            </button>
-        </div>
+
+{% if 'iPhone' in app.request.headers.get('User-Agent')
+    or 'BlackBerry' in app.request.headers.get('User-Agent')
+    or 'Android' in app.request.headers.get('User-Agent') and '?1' in app.request.headers.get('Sec-Ch-Ua-Mobile')
+   %}
+    <div class="relative flex flex-col rounded-xl bg-neutral-100">
+        {{ form_start(form) }}
+        <nav class="flex min-w-[240px] flex-col gap-0 p-1">
+            <div role="button" class="flex w-full items-center rounded-lg p-0 transition-all hover:bg-slate-100 focus:bg-slate-100 active:bg-slate-100">
+
+                    <div class="inline-flex items-center text-xs">
+                            {{ form_widget(form.categories,{'attr':{'class':'mt-4 mr-10 '}}) }}
+                    </div>
+            </div>
+            <div class="w-1/2 md:w-2/12 px-3 py-0 mb-8 md:mb-0">
+                <button type="submit" class=" mt-5 px-3 py-2 text-xs font-medium text-center inline-flex items-center
+                text-white bg-cyan-600 text-white rounded-lg hover:bg-cyan-800 focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:bg-cyan-600 dark:hover:bg-cyan-700 dark:focus:ring-cyan-800">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4">
+                        <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z" clip-rule="evenodd"></path>
+                    </svg>
+                    Filtrer
+                </button>
+            </div>
+        </nav>
+        {{ form_end(form) }}
     </div>
-    {{ form_end(form) }}
+{% else %}
+
+        <div class="relative max-w-2xl mb-5 flex w-full flex-col rounded-xl bg-neutral-100">
+            {{ form_start(form) }}
+            <nav class="flex min-w-[240px] flex-row gap-1 p-2">
+                <div role="button" class="flex md:w-10/12 w-full items-center rounded-lg p-0 transition-all hover:bg-slate-100 focus:bg-slate-100 active:bg-slate-100">
+                        <div class="inline-flex items-center text-sm">
+                                {{ form_widget(form.categories,{'attr':{'class':'mt-4'}}) }}
+                        </div>
+                </div>
+                <div class="w-1/2 md:w-2/12 px-3 py-0 mb-8 md:mb-0">
+                    <button class="btn px-6 py-2.5 bg-cyan-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md
+                     hover:bg-cyan-700 hover:shadow-lg focus:bg-blue-700  focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800
+                     active:shadow-lg transition duration-150 ease-in-out flex items-center" type="submit">
+                        <span>Filtrer&nbsp;&nbsp;</span>
+                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="w-4" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512">
+                            <path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </nav>
+            {{ form_end(form) }}
+        </div>
+    {% endif %}
 {% endif %}
+
+
+
