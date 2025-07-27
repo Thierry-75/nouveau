@@ -36,14 +36,12 @@ class Article
     #[ORM\OneToMany(targetEntity: Photo::class, mappedBy: 'article', cascade: ['persist','remove'], orphanRemoval: true)]
     private Collection $photos;
 
-    /**
-     * @var Collection<int, Category>
-     */
-    #[ORM\ManyToMany(targetEntity: Category::class, mappedBy: 'article')]
-    private Collection $categories;
-
     #[ORM\Column(nullable: false)]
     private ?bool $isPublished = false;
+
+    #[ORM\ManyToOne(inversedBy: 'articles')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Category $category = null;
 
     public function __construct()
     {
@@ -92,8 +90,6 @@ class Article
         return $this;
     }
 
-
-
     /**
      * @return Collection<int, Photo>
      */
@@ -122,32 +118,6 @@ class Article
         return $this;
     }
 
-    /**
-     * @return Collection<int, Category>
-     */
-    public function getCategories(): Collection
-    {
-        return $this->categories;
-    }
-
-    public function addCategory(Category $category): static
-    {
-        if (!$this->categories->contains($category)) {
-            $this->categories->add($category);
-            $category->addArticle($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCategory(Category $category): static
-    {
-        if ($this->categories->removeElement($category)) {
-            $category->removeArticle($this);
-        }
-
-        return $this;
-    }
 
     public function isPublished(): ?bool
     {
@@ -164,5 +134,17 @@ class Article
     public function __toString():string
     {
         return $this->title;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): static
+    {
+        $this->category = $category;
+
+        return $this;
     }
 }

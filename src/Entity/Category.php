@@ -25,16 +25,18 @@ class Category
     #[Assert\Unique]
     private ?string $name = null;
 
-    public function __construct()
-    {
-        $this->article = new ArrayCollection();
-    }
-
     /**
      * @var Collection<int, Article>
      */
-    #[ORM\ManyToMany(targetEntity: Article::class, inversedBy: 'categories')]
-    private Collection $article;
+    #[ORM\OneToMany(targetEntity: Article::class, mappedBy: 'category', orphanRemoval: true)]
+    private Collection $articles;
+
+    public function __construct()
+    {
+        $this->article = new ArrayCollection();
+        $this->articles = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -63,18 +65,24 @@ class Category
         return $this;
     }
 
+    public function __toString():string
+    {
+        return $this->name;
+    }
+
     /**
      * @return Collection<int, Article>
      */
-    public function getArticle(): Collection
+    public function getArticles(): Collection
     {
-        return $this->article;
+        return $this->articles;
     }
 
     public function addArticle(Article $article): static
     {
-        if (!$this->article->contains($article)) {
-            $this->article->add($article);
+        if (!$this->articles->contains($article)) {
+            $this->articles->add($article);
+            $article->setCategory($this);
         }
 
         return $this;
@@ -82,12 +90,13 @@ class Category
 
     public function removeArticle(Article $article): static
     {
-        $this->article->removeElement($article);
-        return $this;
-    }
+        if ($this->articles->removeElement($article)) {
+            // set the owning side to null (unless already changed)
+            if ($article->getCategory() === $this) {
+                $article->setCategory(null);
+            }
+        }
 
-    public function __toString():string
-    {
-        return $this->name;
+        return $this;
     }
 }

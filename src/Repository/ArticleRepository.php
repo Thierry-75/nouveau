@@ -22,6 +22,7 @@ class ArticleRepository extends ServiceEntityRepository
     }
 
     /**
+     * portail affiche les derniers articles récents
      * @return array
      */
     public function findLastArticles(): array
@@ -30,40 +31,51 @@ class ArticleRepository extends ServiceEntityRepository
             ->where('a.isPublished LIKE :state')
             ->setParameter('state','%1%')
             ->orderBy('a.createdAt','DESC')
-            ->setMaxResults(6)
+            ->setMaxResults(9)
             ->getQuery()
             ->getResult();
     }
 
-    public function findAllVerified(int $page, ?Category $category =null): PaginationInterface
+    /**
+     * tous les articles
+     * @param int $page
+     * @param Category|null $category
+     * @return PaginationInterface
+     */
+    public function findPublished(int $page, ?Category $category =null): PaginationInterface
     {
         $data = $this->createQueryBuilder('a')
             ->where('a.isPublished LIKE :state')
             ->setParameter('state','%1%')
-            ->orderBy('a.title','DESC');
+            ->orderBy('a.createdAt','DESC');
 
             if(isset($category)){
                 $data = $data
-                    ->join('a.categories','c')
+                    ->join('a.category','c')
                     ->andWhere(':category IN (c)')
                     ->setParameter('category',$category);
             }
             $data->getQuery()
                  ->getResult();
 
-        return $this->paginator->paginate( $data, $page,6);
+        return $this->paginator->paginate( $data, $page,9);
     }
 
+    /**
+     * affiche articles par categories
+     * @param SearchData $searchData
+     * @return PaginationInterface
+     */
     public function findBySearch(SearchData $searchData): PaginationInterface
     {
         $data = $this->createQueryBuilder('a')
             ->where('a.isPublished LIKE :state')
             ->setParameter('state', '%1%')
-            ->addOrderBy('a.createdAt','DESC');
+            ->addOrderBy('a.title','DESC');
 
         if (!empty($searchData->categories)){
             $data = $data
-                ->join('a.categories','c')
+                ->join('a.category','c')
                 ->andWhere('c.id IN (:categories)')
                 ->setParameter('categories',$searchData->categories);
         }
@@ -71,7 +83,7 @@ class ArticleRepository extends ServiceEntityRepository
         $data  = $data
             ->getQuery()
             ->getResult();
-        return $this->paginator->paginate($data, $searchData->page,6);
+        return $this->paginator->paginate($data, $searchData->page,9);
     }
 
 }

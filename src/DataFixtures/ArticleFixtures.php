@@ -15,10 +15,14 @@ class ArticleFixtures extends Fixture
     public function __construct(private readonly SluggerInterface $slugger)
     {
     }
+
+    /**
+     * @throws \Exception
+     */
     public function load(ObjectManager $manager): void
     {
 
-        $tableau_categories = ['Economie','Informatique','Philosophie','Politique','Histoire'];
+        $tableau_categories = ['Economie','Informatique','Philosophie','Politique','Histoire','Science'];
         foreach ($tableau_categories as $categorie )
         {
             $category = new Category();
@@ -31,7 +35,8 @@ class ArticleFixtures extends Fixture
         $manager->flush();
 
         $faker = Factory::create('fr_FR');
-
+        $random_photos = ['default1.jpeg','default2.jpeg','default3.jpeg','default4.jpeg',
+            'default5.jpeg','default6.jpeg','default7.jpeg','default8.jpeg','default9.jpeg','default10.jpeg'];
         for($i = 0; $i < 50; $i++)
         {
             $article = new Article();
@@ -39,16 +44,16 @@ class ArticleFixtures extends Fixture
                     ->setTitle($faker->sentence(3))
                     ->setSlug($this->slugger->slug(strtolower($article->getTitle())))
                     ->setIsPublished(random_int(0,1)===1 ? true : false)
-                    ->addCategory($categories[random_int(0,count($categories)-1)])
+                    ->setCategory($categories[random_int(0,count($categories)-1)])
                     ->setContenu($faker->realText(2000));
                 for($j=0; $j<3; $j++)
                 {
                     $photo = new Photo();
-                    $photo->setName("default".$j. ".jpeg");
+                    $photo->setName('default'.random_int(1,10).'.jpeg');
                     $article->addPhoto($photo);
                 }
                 $manager->persist($article);
-                sleep(2);
+                sleep(1);
         }
 
         $manager->flush();

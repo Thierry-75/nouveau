@@ -1,7 +1,6 @@
 
+{% if articles  is defined %}
 {% for article in articles %}
-{% if article is defined %}
-
                     <!-- card  -->
                     <div class="testimonial-card flex-shrink-0 w-full md:w-1/2 lg:w-1/3 px-4 animate-fade">
                         <div class="relative"><a href="{{ path('app_article_index',{slug:article.slug}) }}">
@@ -34,8 +33,7 @@
                             </div>
 
                         </div>
-
                     </div>
+{% endfor %}
 
 {% endif %}
-{% endfor %}

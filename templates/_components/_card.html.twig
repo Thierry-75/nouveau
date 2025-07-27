@@ -1,5 +1,7 @@
+
+{% if articles is defined %}
 {% for article in articles %}
-{% if article is defined %}
+
 <!-- CARD 1 -->
 <div class="rounded overflow-hidden shadow-lg flex flex-col">
     <a href="#"></a>
@@ -51,5 +53,6 @@
                 </span>
     </div>
 </div>
-{% endif %}
+
 {% endfor %}
+{% endif %}
