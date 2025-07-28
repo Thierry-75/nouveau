@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 
+
 use App\Form\SearchType;
 use App\Model\SearchData;
 use App\Repository\ArticleRepository;
@@ -48,12 +49,49 @@ final class MainController extends AbstractController
         $form = $this->createForm(SearchType::class,$searchData);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
+            try {
+                $searchData->page = $request->query->getInt('page', 1);
+                $articles = $articleRepository->findByCategory($searchData);
+                return $this->render('main/all_articles.html.twig', ['form' => $form->createView(), 'articles' => $articles]);
+            }catch (EntityNotFoundException $e)
+            {
+                return $this->redirectToRoute('app_error',['exception'=>$e]);
+            }
+        }
+        try {
+            return $this->render('main/all_articles.html.twig', ['form' => $form->createView(),
+                'articles' => $articleRepository->findPublished($request->query->getInt('page', 1))
+            ]);
+        }catch (EntityNotFoundException $e)
+        {
+            return $this->redirectToRoute('app_error',['exception'=>$e]);
+        }
+    }
+
+    /**
+     * affiche articles par tag
+     * @param string $slug
+     * @param ArticleRepository $articleRepository
+     * @param Request $request
+     * @return Response
+     */
+    #[Route('/tag/articles/{slug}',name:'app_articles_tag',methods: ['GET'])]
+    public function articlesTag(string $slug,ArticleRepository $articleRepository,Request $request): Response
+    {
+        $searchData = new SearchData();
+        $form = $this->createForm(SearchType::class,$searchData);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid())
+        {
             $searchData->page = $request->query->getInt('page',1);
-            $articles = $articleRepository->findBySearch($searchData);
+            $articles = $articleRepository->findByCategory($searchData);
             return $this->render('main/all_articles.html.twig',['form'=>$form->createView(),'articles'=>$articles]);
         }
+
         return $this->render('main/all_articles.html.twig',['form'=>$form->createView(),
-            'articles'=>$articleRepository->findPublished($request->query->getInt('page',1))
+            'articles'=>$articleRepository->findByTag($request->query->getInt('page',1),$slug)
             ]);
     }
+
+
 }

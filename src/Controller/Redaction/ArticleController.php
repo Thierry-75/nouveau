@@ -27,11 +27,12 @@ final class ArticleController extends AbstractController
     {
         try {
             $article = $articleRepository->findOneBy(['slug' => $slug]);
+            $posts =$articleRepository->findArticlesByCategory($article->getCategory());
         }catch(EntityNotFoundException $e)
         {
             return $this->redirectToRoute('app_error',['exception'=>$e]);
         }
-        return $this->render('article/index.html.twig',['article'=>$article]);
+        return $this->render('article/index.html.twig',['article'=>$article,'posts'=>$posts]);
     }
 
     /**
@@ -79,4 +80,6 @@ final class ArticleController extends AbstractController
             'form_article_new'=>$form->createView()
         ]);
     }
+
+
 }

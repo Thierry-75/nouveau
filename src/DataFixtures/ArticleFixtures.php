@@ -22,7 +22,7 @@ class ArticleFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
 
-        $tableau_categories = ['Philosophie','Science','Politique','Santé','Archéologie','Astronomie'];
+        $tableau_categories = ['Philosophie','Science','Politique','Archéologie','Commerce'];
         foreach ($tableau_categories as $categorie )
         {
             $category = new Category();

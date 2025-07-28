@@ -43,7 +43,7 @@
 
             // Auto slide
             function startAutoSlide() {
-                autoSlideInterval = setInterval(prevSlide, 10000);
+                autoSlideInterval = setInterval(prevSlide, 15000);
             }
 
             // Event listeners

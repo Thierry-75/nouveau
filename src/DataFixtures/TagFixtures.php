@@ -7,11 +7,12 @@ use App\Repository\ArticleRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class TagFixtures extends Fixture
 {
 
-    public function __construct(private readonly ArticleRepository $articleRepository){}
+    public function __construct(private readonly ArticleRepository $articleRepository,private readonly SluggerInterface $slugger){}
 
     /**
      * @throws \Exception
@@ -26,6 +27,7 @@ class TagFixtures extends Fixture
         {
             $tag = new Tag();
             $tag->setName($faker->word())
+                ->setSlug($this->slugger->slug(strtolower($tag->getName())))
                 ->setCreatedAt(new \DateTimeImmutable());
             $tags[]=$tag;
             $manager->persist($tag);

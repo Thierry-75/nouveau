@@ -27,6 +27,9 @@ class Tag
     #[ORM\ManyToMany(targetEntity: Article::class, inversedBy: 'tags')]
     private Collection $article;
 
+    #[ORM\Column(length: 50)]
+    private ?string $slug = null;
+
     public function __construct()
     {
         $this->article = new ArrayCollection();
@@ -81,6 +84,18 @@ class Tag
     public function removeArticle(Article $article): static
     {
         $this->article->removeElement($article);
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): static
+    {
+        $this->slug = $slug;
 
         return $this;
     }

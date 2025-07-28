@@ -43,7 +43,7 @@ class ArticleRepository extends ServiceEntityRepository
      * @param Category|null $category
      * @return PaginationInterface
      */
-    public function findPublished(int $page, ?Category $category =null, ?Tag $tags =null): PaginationInterface
+    public function findPublished(int $page, ?Category $category =null): PaginationInterface
     {
         $data = $this->createQueryBuilder('a')
             ->where('a.isPublished LIKE :state')
@@ -56,12 +56,6 @@ class ArticleRepository extends ServiceEntityRepository
                     ->andWhere(':category IN (c)')
                     ->setParameter('category',$category);
             }
-            if(isset($tags)){
-            $data = $data
-                ->join('a.tags','t')
-                ->andWhere(':tags IN (t)')
-                ->setParameter('tags',$tags);
-        }
             $data->getQuery()
                  ->getResult();
 
@@ -69,11 +63,47 @@ class ArticleRepository extends ServiceEntityRepository
     }
 
     /**
+     * @param int $page
+     * @param string|null $tag
+     * @return PaginationInterface
+     */
+    public function findByTag(int $page,string $tag =null): PaginationInterface
+    {
+
+        $data = $this->createQueryBuilder('a')
+                ->join('a.tags','t')
+                ->where(':tags = t.name' )
+                ->setParameter('tags',$tag)
+                ->orderBy('a.createdAt','DESC')
+                ->getQuery()
+                ->getResult();
+
+        return $this->paginator->paginate($data,$page,9);
+    }
+
+    /**
+     * articles par categorie sur page article
+     * @param Category $category
+     * @return array
+     */
+    public function findArticlesByCategory(Category $category):array
+    {
+        return $this->createQueryBuilder('a')
+            ->join('a.category','c')
+            ->where(':category = c.id')
+            ->setParameter('category',$category->getId())
+            ->orderBy('a.createdAt','DESC')
+            ->setMaxResults(6)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
      * affiche articles par categories
      * @param SearchData $searchData
      * @return PaginationInterface
      */
-    public function findBySearch(SearchData $searchData): PaginationInterface
+    public function findByCategory(SearchData $searchData): PaginationInterface
     {
         $data = $this->createQueryBuilder('a')
             ->where('a.isPublished LIKE :state')
